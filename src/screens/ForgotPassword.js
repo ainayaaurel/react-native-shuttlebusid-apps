@@ -6,11 +6,15 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 
 const { width: WIDTH } = Dimensions.get('window')
 export default class ForgotPassword extends Component {
+  constructor(props) {
+    super(props)
+    this.changeScreen
+  }
   render() {
     return (
       <View style={styles.parent}>
         <View style={styles.logoContainer}>
-          <IconLock name='lock1' size={70} color='rgb(244,247,247)' />
+          <IconLock name='lock1' size={60} color='rgb(244,247,247)' />
           <Text style={styles.textForgot}>Forgot Password?</Text>
           <Text style={styles.textDesc}>We just need your registered email address to send you password reset</Text>
         </View>
@@ -30,6 +34,10 @@ export default class ForgotPassword extends Component {
             <Text style={styles.textReset}>RESET PASSWORD</Text>
           </TouchableOpacity>
         </View>
+        <View style={styles.register}>
+          <Text style={styles.textDesc}>DON'T HAVE AN ACCOUNT?</Text>
+          <Text style={styles.textRegister}>REGISTER</Text>
+        </View>
       </View>
     )
   }
@@ -43,7 +51,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgb(43,45,56)'
   },
   logoContainer: {
-    alignItems: 'center'
+    alignItems: 'center',
   },
   textForgot: {
     fontSize: 20,
@@ -76,11 +84,21 @@ const styles = StyleSheet.create({
     height: 45,
     backgroundColor: '#58D43E',
     justifyContent: 'center',
-    marginTop: 30
+    marginTop: 20
   },
   textReset: {
     textAlign: 'center',
     color: '#fff'
+  },
+  textRegister: {
+    fontSize: 17,
+    textAlign: 'center',
+    color: '#F3EEF4',
+    fontWeight: 'bold'
+  },
+  register: {
+    position: 'absolute',
+    bottom: 20
   }
 
 })

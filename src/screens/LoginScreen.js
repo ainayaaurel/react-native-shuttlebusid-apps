@@ -17,6 +17,9 @@ export default class Login extends Component {
     this.changeScreenForgot = () => {
       this.props.navigation.navigate('ForgotPassword')
     }
+    this.changeScreenLogin = () => {
+      this.props.navigation.navigate('Home')
+    }
   }
   render() {
     return (
@@ -54,7 +57,7 @@ export default class Login extends Component {
           </TouchableOpacity>
         </View>
         <TouchableOpacity style={styles.btnLogin}>
-          <Text style={styles.textLogin}>LOGIN</Text>
+          <Text style={styles.textLogin} onPress={this.changeScreenLogin}>LOGIN</Text>
         </TouchableOpacity>
         <View style={styles.createacc}>
           <TouchableOpacity onPress={this.changeScreen}>
