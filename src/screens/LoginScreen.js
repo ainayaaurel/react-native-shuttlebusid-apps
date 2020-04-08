@@ -9,6 +9,12 @@ import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 const { width: WIDTH } = Dimensions.get('window')
 
 export default class Login extends Component {
+  constructor(props) {
+    super(props)
+    this.changeScreen = () => {
+      this.props.navigation.navigate('Register')
+    }
+  }
   render() {
     return (
       <View style={styles.parent}>
@@ -35,15 +41,22 @@ export default class Login extends Component {
             placeholderTextColor='rgba(255,255,255, 0.7)'
             underlineColorAndroid='transparent'
           />
-          <TouchableOpacity style={styles.btnEye}>
+          {/* <TouchableOpacity style={styles.btnEye}>
             <IconEye name='eye-off' size={20} color='rgba(255,255,255, 0.7)' />
+          </TouchableOpacity> */}
+        </View>
+        <View style={styles.forgot}>
+          <TouchableOpacity>
+            <Text>Forgot Password?</Text>
           </TouchableOpacity>
         </View>
         <TouchableOpacity style={styles.btnLogin}>
           <Text style={styles.textLogin}>LOGIN</Text>
         </TouchableOpacity>
         <View style={styles.createacc}>
-          <Text style={styles.textCreate}>Don't have account? Create your account in here</Text>
+          <TouchableOpacity onPress={this.changeScreen}>
+            <Text style={styles.textCreate}>Don't have account? Sign Up</Text>
+          </TouchableOpacity>
         </View>
       </View>
     );
@@ -111,18 +124,23 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     backgroundColor: 'white',
     justifyContent: 'center',
-    marginTop: 20
+    marginTop: 30
   },
   textLogin: {
     fontSize: 16,
-    textAlign: 'center'
+    textAlign: 'center',
+    fontWeight: 'bold'
   },
   createacc: {
     marginTop: 20
   },
   textCreate: {
-    fontSize: 12,
+    fontSize: 13,
     textDecorationLine: 'underline'
+  },
+  forgot: {
+    marginTop: 10,
+    marginLeft: '45%'
   }
 
 })
