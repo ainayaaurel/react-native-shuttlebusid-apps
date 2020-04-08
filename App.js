@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import Login from '../ticketapps/src/screens/LoginScreen'
 import Register from '../ticketapps/src/screens/RegisterScreen'
+import ForgotPassword from '../ticketapps/src/screens/ForgotPassword'
 
 // const styles = StyleSheet.create({
 //   parent: {
@@ -37,6 +38,8 @@ export default class App extends Component {
             headerShown: false
           }} />
           <Stack.Screen name='Register' component={Register} />
+          <Stack.Screen name='ForgotPassword' component={ForgotPassword}
+            options={{ headerShown: false }} />
         </Stack.Navigator>
       </NavigationContainer>
     )

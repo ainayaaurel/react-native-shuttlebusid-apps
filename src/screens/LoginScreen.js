@@ -14,6 +14,9 @@ export default class Login extends Component {
     this.changeScreen = () => {
       this.props.navigation.navigate('Register')
     }
+    this.changeScreenForgot = () => {
+      this.props.navigation.navigate('ForgotPassword')
+    }
   }
   render() {
     return (
@@ -46,7 +49,7 @@ export default class Login extends Component {
           </TouchableOpacity> */}
         </View>
         <View style={styles.forgot}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={this.changeScreenForgot}>
             <Text>Forgot Password?</Text>
           </TouchableOpacity>
         </View>
@@ -140,7 +143,8 @@ const styles = StyleSheet.create({
   },
   forgot: {
     marginTop: 10,
-    marginLeft: '45%'
+    marginLeft: '45%',
+    fontSize: 13
   }
 
 })
