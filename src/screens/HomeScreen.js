@@ -16,6 +16,12 @@ const list = [
 const { width: WIDTH } = Dimensions.get('window')
 
 export default class HomeScreen extends Component {
+  constructor(props) {
+    super(props)
+    this.changeScreenToBus = () => {
+      this.props.navigation.navigate('Select Bus')
+    }
+  }
   state = {
     search: '',
     selectedItems: {}
