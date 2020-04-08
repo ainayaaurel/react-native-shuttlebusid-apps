@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, Dimensions } from 'react-native'
-import { Container, Header, Content, Form, Item, Input, Button, View } from 'native-base';
+import { StyleSheet, Text, Dimensions, View } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome5'
 import IconPass from 'react-native-vector-icons/Feather'
 import IconEye from 'react-native-vector-icons/Feather'
@@ -47,9 +46,9 @@ export default class Login extends Component {
             placeholderTextColor='rgba(255,255,255, 0.7)'
             underlineColorAndroid='transparent'
           />
-          {/* <TouchableOpacity style={styles.btnEye}>
-            <IconEye name='eye-off' size={20} color='rgba(255,255,255, 0.7)' />
-          </TouchableOpacity> */}
+          {/* <Feather
+            name='eye-off' size={20} color='rgba(255,255,255, 0.7)'
+          /> */}
         </View>
         <View style={styles.forgot}>
           <TouchableOpacity onPress={this.changeScreenForgot}>
@@ -151,3 +150,7 @@ const styles = StyleSheet.create({
   }
 
 })
+
+{/* <TouchableOpacity style={styles.btnEye}>
+            <IconEye name='eye-off' size={20} color='rgba(255,255,255, 0.7)' />
+          </TouchableOpacity> */}
