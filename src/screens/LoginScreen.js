@@ -10,7 +10,7 @@ const { width: WIDTH } = Dimensions.get('window')
 export default class Login extends Component {
   constructor(props) {
     super(props)
-    this.changeScreen = () => {
+    this.changeScreenRegister = () => {
       this.props.navigation.navigate('Register')
     }
     this.changeScreenForgot = () => {
@@ -59,7 +59,7 @@ export default class Login extends Component {
           <Text style={styles.textLogin} onPress={this.changeScreenLogin}>LOGIN</Text>
         </TouchableOpacity>
         <View style={styles.createacc}>
-          <TouchableOpacity onPress={this.changeScreen}>
+          <TouchableOpacity onPress={this.changeScreenRegister}>
             <Text style={styles.textCreate}>Don't have account? Sign Up</Text>
           </TouchableOpacity>
         </View>

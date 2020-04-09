@@ -4,6 +4,12 @@ import { TextInput, TouchableOpacity } from 'react-native-gesture-handler'
 
 const { width: WIDTH } = Dimensions.get('window')
 export default class RegisterScreen extends Component {
+  constructor(props) {
+    super(props)
+    this.changeScreenLogin = () => {
+      this.props.navigation.navigate('Login')
+    }
+  }
   render() {
     return (
       <View style={styles.parent}>
@@ -40,7 +46,7 @@ export default class RegisterScreen extends Component {
         </TouchableOpacity>
         <View>
           <TouchableOpacity style={styles.login}>
-            <Text style={styles.textLogIn}>Already have an account yet? Log In</Text>
+            <Text style={styles.textLogIn} onPress={this.changeScreenLogin}>Already have an account yet? Log In</Text>
           </TouchableOpacity>
         </View>
       </View>

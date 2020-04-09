@@ -8,7 +8,9 @@ const { width: WIDTH } = Dimensions.get('window')
 export default class ForgotPassword extends Component {
   constructor(props) {
     super(props)
-    this.changeScreen
+    this.changeScreenRegister = () => {
+      this.props.navigation.navigate('Register')
+    }
   }
   render() {
     return (
@@ -36,7 +38,7 @@ export default class ForgotPassword extends Component {
         </View>
         <View style={styles.register}>
           <Text style={styles.textDesc}>DON'T HAVE AN ACCOUNT?</Text>
-          <Text style={styles.textRegister}>REGISTER</Text>
+          <Text style={styles.textRegister} onPress={this.changeScreenRegister}>REGISTER</Text>
         </View>
       </View>
     )
