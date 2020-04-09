@@ -8,6 +8,7 @@ import ForgotPassword from '../ticketapps/src/screens/ForgotPassword'
 import BottomStack from '../ticketapps/src/screens/BottomStack'
 import Home from '../ticketapps/src/screens/HomeScreen'
 import SelectBus from '../ticketapps/src/screens/SelectBus'
+import Calendar from '../ticketapps/src/screens/Calender'
 
 const Stack = createStackNavigator()
 
@@ -24,6 +25,7 @@ export default class App extends Component {
             options={{ headerShown: false }} />
           <Stack.Screen name='Home' component={BottomStack} options={{ headerShown: false }} />
           <Stack.Screen name='Select Bus' component={SelectBus} options={{ headerShown: false }} />
+          <Stack.Screen name='Calendar' component={Calendar} options={{ headerShown: false }} />
         </Stack.Navigator>
       </NavigationContainer>
     )

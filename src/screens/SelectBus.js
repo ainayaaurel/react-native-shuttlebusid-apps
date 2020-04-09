@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { Card } from 'react-native-elements'
 import IconBus from 'react-native-vector-icons/MaterialCommunityIcons'
+import IconSort from 'react-native-vector-icons/FontAwesome5'
+import { TouchableOpacity } from 'react-native-gesture-handler'
+import { Button } from 'native-base'
 
 export default class SelectBus extends Component {
   render() {
@@ -11,13 +14,16 @@ export default class SelectBus extends Component {
           <IconBus name='bus-side' size={50} color='#fff' />
         </View>
         <View style={styles.headersecond}>
-          <Text> 5 Busses Found </Text>
+          <View style={styles.logoContainer}>
+            <IconSort name='sort-amount-down' size={18} color='#000' style={styles.inputIcon} />
+            <Text style={styles.input} > 5 Busses Found </Text>
+          </View>
         </View>
         <Card
-          title='HELLO WORLD'
+          title='Baraya Jaya'
           style={{ marginTop: 50 }}>
           <Text style={{ marginBottom: 20 }}>
-            The idea with React Native Elements is more about component structure than actual design.
+            Identitas tiket, ada jam, rating, dan harga
       </Text>
         </Card>
       </View>
@@ -38,11 +44,22 @@ const styles = StyleSheet.create({
     paddingLeft: 25,
     height: 40,
     borderBottomWidth: 0.3,
-
   },
   card: {
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 40
-  }
+  },
+  logoContainer: {
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  inputIcon: {
+    position: 'absolute',
+    top: 9,
+    right: 30,
+  },
+  input: {
+    top: 8
+  },
 })

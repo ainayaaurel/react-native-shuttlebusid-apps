@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, Dimensions, TouchableOpacity } from 'react-native'
-import IconBus from 'react-native-vector-icons/MaterialCommunityIcons'
+import IconBus from 'react-native-vector-icons/FontAwesome5'
 import { TextInput } from 'react-native-gesture-handler'
 import { SearchBar } from 'react-native-elements';
 import PickerModal from 'react-native-picker-modal-view';
-import { Card, ListItem, Button, Icon } from 'react-native-elements'
+import { Card, ListItem, Button, Icon, Header } from 'react-native-elements'
+import Icondots from 'react-native-vector-icons/MaterialCommunityIcons'
 
 const list = [
   { Id: 1, Name: 'Jakarta - Bandung', Value: 'Jakarta - Bandung' },
@@ -21,6 +22,9 @@ export default class HomeScreen extends Component {
     this.changeScreenToBus = () => {
       this.props.navigation.navigate('Select Bus')
     }
+    this.changeScreenToCalendar = () => {
+      this.props.navigation.navigate('Calendar')
+    }
   }
   state = {
     search: '',
@@ -35,9 +39,12 @@ export default class HomeScreen extends Component {
   render() {
     return (
       <View>
-        <View style={styles.header}>
-          <IconBus name='bus-side' size={50} color='#fff' />
-        </View>
+        <Header
+          containerStyle={{ backgroundColor: '#15B105', marginTop: -30 }}
+          centerComponent={{ text: 'SHUTTLEBUS-ID', fontWeight: 'bold', style: { color: '#fff' } }}
+          leftComponent={<IconBus name='bus' color='#fff' size={30} />}
+          rightComponent={<Icondots name='dots-vertical' color='#fff' size={30} />}
+        />
         <Card>
           <Text style={{ marginBottom: 10 }}>
             Departure - Arrival
@@ -80,7 +87,7 @@ export default class HomeScreen extends Component {
             autoSort={true}
           />
           <TouchableOpacity style={styles.btnSearch}>
-            <Text style={styles.textSearch} onPress={this.changeScreenToBus}>SEARCH</Text>
+            <Text style={styles.textSearch} onPress={this.changeScreenToCalendar}>SEARCH</Text>
           </TouchableOpacity>
         </Card>
       </View>
@@ -133,6 +140,10 @@ const styles = StyleSheet.create({
   }
 })
 
+
+{/* <View style={styles.header}>
+          <IconBus name='bus-side' size={50} color='#fff' />
+        </View> */}
 // {/* <View style={styles.inputContainer}>
 //           <TextInput
 //             style={styles.input} placeholder='Your name'
