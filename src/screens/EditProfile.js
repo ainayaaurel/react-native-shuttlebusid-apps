@@ -3,62 +3,52 @@ import { View, Text, StyleSheet, Dimensions } from 'react-native'
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler'
 
 const { width: WIDTH } = Dimensions.get('window')
-export default class RegisterScreen extends Component {
+export default class EditProfile extends Component {
   constructor(props) {
     super(props)
     this.changeScreenLogin = () => {
-      this.props.navigation.navigate('Login')
+      this.props.navigation.navigate('Edit Profile')
     }
   }
   render() {
     return (
       <View style={styles.parent}>
         <View>
-          <Text style={styles.title}>Create your account</Text>
+          <Text style={styles.title}>You can change personal data in here</Text>
         </View>
         <View>
+          <Text style={styles.text}>Name Profile</Text>
           <TextInput
-            style={styles.input} placeholder='Your username'
+            style={styles.input} placeholder='Your name' underlineColorAndroid='#569248'
           />
         </View>
         <View>
+          <Text style={styles.text}>Gender</Text>
           <TextInput
-            style={styles.input} placeholder='Your password'
+            style={styles.input} placeholder='Your name' underlineColorAndroid='#569248'
           />
         </View>
         <View>
+          <Text style={styles.text}>Address</Text>
           <TextInput
-            style={styles.input} placeholder='Your name'
+            style={styles.input} placeholder='Your name' underlineColorAndroid='#569248'
           />
         </View>
         <View>
+          <Text style={styles.text}>Phone</Text>
           <TextInput
-            style={styles.input} placeholder='Your gender'
+            style={styles.input} placeholder='Your name' underlineColorAndroid='#569248'
           />
         </View>
         <View>
+          <Text style={styles.text}>Email</Text>
           <TextInput
-            style={styles.input} placeholder='Your address'
-          />
-        </View>
-        <View>
-          <TextInput
-            style={styles.input} placeholder='Your phone'
-          />
-        </View>
-        <View>
-          <TextInput
-            style={styles.input} placeholder='Your email'
+            style={styles.input} placeholder='Your name' underlineColorAndroid='#569248'
           />
         </View>
         <TouchableOpacity style={styles.btnSignUp}>
-          <Text style={styles.textSignUp}>Sign Up</Text>
+          <Text style={styles.textSave}>SAVE</Text>
         </TouchableOpacity>
-        <View>
-          <TouchableOpacity style={styles.login}>
-            <Text style={styles.textLogIn} onPress={this.changeScreenLogin}>Already have an account yet? Log In</Text>
-          </TouchableOpacity>
-        </View>
       </View>
     )
   }
@@ -72,19 +62,16 @@ const styles = StyleSheet.create({
     color: '#fff'
   },
   title: {
-    fontSize: 20,
+    fontSize: 15,
     color: 'black',
     marginBottom: 20
   },
   input: {
     width: WIDTH - 65,
-    height: 45,
-    fontSize: 16,
-    // backgroundColor: 'rgba(0,0,0,0.35)',
+    height: 40,
+    fontSize: 15,
     color: 'black',
-    borderBottomWidth: 1,
-    alignSelf: 'stretch',
-    marginBottom: 15
+    marginBottom: 8
   },
   btnSignUp: {
     width: WIDTH - 200,
@@ -94,10 +81,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingBottom: 5
   },
-  textSignUp: {
+  textSave: {
     fontSize: 18,
     textAlign: 'center',
     fontWeight: 'bold',
+    color: '#fff'
   },
   textLogIn: {
     fontSize: 12,
@@ -105,5 +93,10 @@ const styles = StyleSheet.create({
   },
   login: {
     marginTop: 20
+  },
+  text: {
+    color: '#569248',
+    fontFamily: 'sans- serif'
+
   }
 })

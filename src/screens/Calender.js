@@ -11,15 +11,6 @@ LocaleConfig.locales['fr'] = {
 };
 LocaleConfig.defaultLocale = 'fr';
 
-const callBack =
-{
-  day: 1,      // day of month (1-31)
-  month: 1,    // month of year (1-12)
-  year: 2017,  // year
-  timestamp,   // UTC timestamp representing 00:00 AM of this date
-  dateString: '2016-05-13' // date formatted as 'DD-MM-YYYY-' string
-}
-
 export default class Calender extends Component {
   render() {
     return (
@@ -31,7 +22,14 @@ export default class Calender extends Component {
         // Maximum date that can be selected, dates after maxDate will be grayed out. Default = undefined
         maxDate={'2020-08-30'}
         // Handler which gets executed on day press. Default = undefined
-        onDayPress={(day) => { console.log('selected day', day) }}
+        onDayPress={(day) => {
+          // console.log('selected day', day)
+          // console.log(this.props.navigation.goBack())
+          this.props.route.params.selectdate(day)
+          this.props.navigation.goBack()
+          // this.props.navigation.navigate('Home', { dateSelected: day.dateString })
+        }}
+
         // Handler which gets executed on day long press. Default = undefined
         onDayLongPress={(day) => { console.log('selected day', day) }}
         // Month format in calendar title. Formatting values: http://arshaw.com/xdate/#Formatting

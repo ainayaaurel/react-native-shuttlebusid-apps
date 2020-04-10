@@ -23,12 +23,13 @@ export default class HomeScreen extends Component {
       this.props.navigation.navigate('Select Bus')
     }
     this.changeScreenToCalendar = () => {
-      this.props.navigation.navigate('Calendar')
+      this.props.navigation.navigate('Calendar', { selectdate: (date) => this.updateDate(date) })
     }
   }
   state = {
     search: '',
-    selectedItems: {}
+    selectedItems: {},
+    date: {}
   };
   updateSearch = search => {
     this.setState({ search });
@@ -36,6 +37,12 @@ export default class HomeScreen extends Component {
   selected = selectedItems => {
     this.setState({ selectedItems })
   };
+  updateDate = date => {
+    this.setState({ date });
+    console.log(date)
+  }
+  componentDidMount() {
+  }
   render() {
     return (
       <View>
@@ -69,25 +76,16 @@ export default class HomeScreen extends Component {
           <Text style={{ marginBottom: 10, fontSize: 18 }}>
             Date
           </Text>
-          <PickerModal
-            onSelected={this.selected}
-            value={this.state.selectedItems}
-            onSelected={(selected) => this.selected(selected)}
-            onRequestClosed={() => console.warn('closed...')}
-            onBackRequest={() => console.warn('back key pressed')}
-            items={list}
-            sortingLanguage={'tr'}
-            showToTopButton={true}
-            defaultSelected={this.state.selectedItem}
-            autoCorrect={false}
-            autoGenerateAlphabet={true}
-            chooseText={'Select departure - arrival'}
-            searchText={'Search...'}
-            forceSelect={false}
-            autoSort={true}
-          />
+          <TouchableOpacity onPress={this.changeScreenToCalendar}>
+            <Text>
+              Date Pick
+            </Text>
+            <Text>
+              {this.state.date.dateString && this.state.date.dateString}
+            </Text>
+          </TouchableOpacity>
           <TouchableOpacity style={styles.btnSearch}>
-            <Text style={styles.textSearch} onPress={this.changeScreenToCalendar}>SEARCH</Text>
+            <Text style={styles.textSearch} onPress={this.changeScreenToBus}>SEARCH</Text>
           </TouchableOpacity>
         </Card>
       </View>

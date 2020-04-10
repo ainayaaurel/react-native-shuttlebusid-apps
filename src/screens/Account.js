@@ -28,6 +28,12 @@ import { Card, Button, Header, Avatar } from 'react-native-elements'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
 export default class Account extends Component {
+  constructor(props) {
+    super(props)
+    this.changeScreenEditProfile = () => {
+      this.props.navigation.navigate('Edit Profile')
+    }
+  }
   render() {
     return (
       <View>
@@ -51,7 +57,7 @@ export default class Account extends Component {
             <Text style={{ position: 'absolute', marginTop: 15, paddingLeft: 100 }}>
               Dinda Ayu
           </Text>
-            <TouchableOpacity style={styles.touchedit}>
+            <TouchableOpacity style={styles.touchedit} onPress={this.changeScreenEditProfile} >
               <Text style={styles.textEdit}>
                 EDIT PROFILE
             </Text>

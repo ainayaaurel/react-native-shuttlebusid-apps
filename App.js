@@ -9,7 +9,11 @@ import BottomStack from '../ticketapps/src/screens/BottomStack'
 import Home from '../ticketapps/src/screens/HomeScreen'
 import SelectBus from '../ticketapps/src/screens/SelectBus'
 import Calendar from '../ticketapps/src/screens/Calender'
-
+import { Provider } from 'react-redux'
+import { PersistGate } from 'redux-persist/integration/react'
+import { store, persistor } from './src/Redux/store'
+import EditProfile from './src/screens/EditProfile'
+import ChooseChair from './src/screens/SelectaChair'
 const Stack = createStackNavigator()
 
 export default class App extends Component {
@@ -24,10 +28,31 @@ export default class App extends Component {
           <Stack.Screen name='ForgotPassword' component={ForgotPassword}
             options={{ headerShown: false }} />
           <Stack.Screen name='Home' component={BottomStack} options={{ headerShown: false }} />
-          <Stack.Screen name='Select Bus' component={SelectBus} options={{ headerShown: false }} />
+          <Stack.Screen name='Select Bus' component={SelectBus} options={{ headerShown: true }} />
+          <Stack.Screen name='Back' component={ChooseChair} options={{ headerShown: true }} />
           <Stack.Screen name='Calendar' component={Calendar} options={{ headerShown: false }} />
+          <Stack.Screen name='Edit Profile' component={EditProfile} options={{ headerShown: true }} />
         </Stack.Navigator>
       </NavigationContainer>
     )
   }
 }
+
+// const AppNavigator = createSwitchNavigator({
+//   AuthLoading: AuthLoadingScreen,
+//   App: TabNavigator,
+//   Auth: AuthStack,
+// });
+
+// const AppContainer = createAppContainer(AppNavigator);
+
+// function App() {
+//   return (
+//     <Provider store={store}>
+//       <PersistGate loading={null} persistor={persistor}>
+//         <AppContainer />
+//       </PersistGate>
+//     </Provider>
+//   );
+// }
+
