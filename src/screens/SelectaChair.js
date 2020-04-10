@@ -9,6 +9,15 @@ const { height } = Dimensions.get('window');
 const box_count = 2;
 const box_height = height / box_count;
 
+const list = [
+  {
+    icon: 'seat'
+  },
+  {
+    icon: 'seat'
+  }
+]
+
 export default class SelectaChair extends Component {
   constructor(props) {
     super(props)
@@ -17,9 +26,6 @@ export default class SelectaChair extends Component {
       color: 'grey'
     }
 
-    const list = [{
-      icon: 'seat'
-    }]
 
     this.onChangeColorSeat = () => {
       if (this.state.toggle === false) {
@@ -47,42 +53,15 @@ export default class SelectaChair extends Component {
           f
           centerComponent={{ text: 'Choose Seat', style: { color: '#fff' } }}
         />
-        <View style={styles.parent}>
-          <View style={styles.box1}>
-            <TouchableOpacity>
-              <IconSeat name='seat' size={50} color={this.state.color} onPress={this.onChangeColorSeat} />
-            </TouchableOpacity>
-          </View>
-          <View style={styles.box2}>
-            <TouchableOpacity>
-              <IconSeat name='seat' size={50} color='black' />
-            </TouchableOpacity>
-          </View>
-          <View style={styles.box3}>
-            <TouchableOpacity>
-              <IconSeat name='seat' size={50} color='black' />
-            </TouchableOpacity>
-          </View>
-          <View style={styles.box4}>
-            <TouchableOpacity>
-              <IconSeat name='seat' size={50} color='black' />
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <IconSeat name='seat' size={50} color='black' />
-            </TouchableOpacity><TouchableOpacity>
-              <IconSeat name='seat' size={50} color='black' />
-            </TouchableOpacity><TouchableOpacity>
-              <IconSeat name='seat' size={50} color='black' />
-            </TouchableOpacity><TouchableOpacity>
-              <IconSeat name='seat' size={50} color='black' />
-            </TouchableOpacity><TouchableOpacity>
-              <IconSeat name='seat' size={50} color='black' />
-            </TouchableOpacity><TouchableOpacity>
-              <IconSeat name='seat' size={50} color='black' />
-            </TouchableOpacity><TouchableOpacity>
-              <IconSeat name='seat' size={50} color='black' />
-            </TouchableOpacity>
-          </View>
+        <View>
+          {
+            list.map((item, index) => (
+              <ListItem
+                key={index}
+                Icon={{ name: item.icon }}
+              />
+            ))
+          }
         </View>
       </>
     )

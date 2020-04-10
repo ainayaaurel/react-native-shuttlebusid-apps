@@ -24,14 +24,24 @@
 
 import React, { Component } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
-import { Card, Button, Header, Avatar } from 'react-native-elements'
+import { Card, Button, Header, Avatar, ListItem } from 'react-native-elements'
 import { TouchableOpacity } from 'react-native-gesture-handler'
+import icon from 'react-native-vector-icons/MaterialIcons'
 
+const list = [
+  {
+    title: 'Top-Up',
+    icon: 'payment'
+  },
+]
 export default class Account extends Component {
   constructor(props) {
     super(props)
     this.changeScreenEditProfile = () => {
       this.props.navigation.navigate('Edit Profile')
+    }
+    this.changeScreenTopUp = () => {
+      this.props.navigation.navigate('Top Up')
     }
   }
   render() {
@@ -57,6 +67,9 @@ export default class Account extends Component {
             <Text style={{ position: 'absolute', marginTop: 15, paddingLeft: 100 }}>
               Dinda Ayu
           </Text>
+            <Text style={{ position: 'absolute', marginTop: 35, paddingLeft: 100 }}>
+              Balance : Rp
+          </Text>
             <TouchableOpacity style={styles.touchedit} onPress={this.changeScreenEditProfile} >
               <Text style={styles.textEdit}>
                 EDIT PROFILE
@@ -67,6 +80,24 @@ export default class Account extends Component {
               buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, marginTop: 20 }}
               title='Edit Profile' /> */}
           </Card>
+          <View>
+            <Card>
+              <TouchableOpacity onPress={this.changeScreenTopUp}>
+                {
+                  list.map((item, i) => (
+                    <ListItem
+                      containerStyle={{ backgroundColor: '#529B77' }}
+                      key={i}
+                      title={item.title}
+                      leftIcon={{ name: item.icon }}
+
+                      chevron
+                    />
+                  ))
+                }
+              </TouchableOpacity>
+            </Card>
+          </View>
         </View>
       </View >
     )

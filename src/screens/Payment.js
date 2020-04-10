@@ -37,7 +37,7 @@ export default class SelectaChair extends Component {
           }
         </View>
 
-        <Overlay
+        {/* <Overlay
           isVisible={this.state.isVisible}
           windowBackgroundColor="rgba(255, 255, 255, .5)"
           overlayBackgroundColor="red"
@@ -52,7 +52,7 @@ export default class SelectaChair extends Component {
           onBackdropPress={() => this.setState({ isVisible: false })}
         >
           <Text>Hello from Overlay!</Text>
-        </Overlay>;
+        </Overlay>; */}
       </View>
     )
   }

@@ -14,6 +14,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 import { store, persistor } from './src/Redux/store'
 import EditProfile from './src/screens/EditProfile'
 import ChooseChair from './src/screens/SelectaChair'
+import TopUp from './src/screens/TopUp'
 const Stack = createStackNavigator()
 
 export default class App extends Component {
@@ -32,6 +33,8 @@ export default class App extends Component {
           <Stack.Screen name='Back' component={ChooseChair} options={{ headerShown: true }} />
           <Stack.Screen name='Calendar' component={Calendar} options={{ headerShown: false }} />
           <Stack.Screen name='Edit Profile' component={EditProfile} options={{ headerShown: true }} />
+          <Stack.Screen name='Top Up' component={TopUp}
+            options={{ headerShown: true }} />
         </Stack.Navigator>
       </NavigationContainer>
     )
