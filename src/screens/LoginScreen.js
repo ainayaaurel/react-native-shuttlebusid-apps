@@ -4,7 +4,7 @@ import IconBus from 'react-native-vector-icons/FontAwesome5'
 import IconPass from 'react-native-vector-icons/Feather'
 import IconEye from 'react-native-vector-icons/Feather'
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
-import { isLogin } from '../Redux/Actions/AuthLogin/ActionsLogin'
+import { isLogin } from '../Redux/Actions/Auth/AuthLogin'
 import { connect } from 'react-redux'
 
 const { width: WIDTH } = Dimensions.get('window')

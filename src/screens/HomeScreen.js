@@ -7,6 +7,7 @@ import PickerModal from 'react-native-picker-modal-view';
 import { Card, ListItem, Button, Icon, Header } from 'react-native-elements'
 import Icondots from 'react-native-vector-icons/MaterialCommunityIcons'
 import { getRoutes } from '../Redux/Actions/ActionsRoutes'
+
 import { connect } from 'react-redux'
 
 const list = [
@@ -31,6 +32,7 @@ class HomeScreen extends Component {
     this.changeScreenToBus = () => {
       this.props.navigation.navigate('Select Bus')
     }
+
     this.changeScreenToCalendar = () => {
       this.props.navigation.navigate('Calendar', { selectdate: (date) => this.updateDate(date) })
     }
@@ -163,7 +165,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => ({
   routes: state.routes.routes,
-  login: state.login.login
+  login: state.login.login,
+
 })
 
 export default connect(mapStateToProps, { getRoutes })(HomeScreen)

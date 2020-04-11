@@ -4,8 +4,7 @@ import axios from 'axios'
 export const getRoutes = () => async dispatch => {
   try {
     const res = await axios.get(config.APP_BACKEND.concat('routes'))
-
-    console.log('ini data baruuuu', routeData)
+    console.log('ini data baruuuu', res)
     if (res.data.data) {
       dispatch({
         type: 'GET_ROUTES',

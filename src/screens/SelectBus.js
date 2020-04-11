@@ -5,13 +5,25 @@ import IconBus from 'react-native-vector-icons/MaterialCommunityIcons'
 import IconSort from 'react-native-vector-icons/FontAwesome5'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { Button, Header } from 'native-base'
+import { connect } from 'react-redux'
+import { getSchedules } from '../Redux/Actions/ActionsSchedules'
 
-export default class SelectBus extends Component {
+class SelectBus extends Component {
   constructor(props) {
     super(props)
+    this.props.getSchedules()
+
+
+    this.changeScreenToHome = () => {
+      this.props.navigation.navigate('Home')
+    }
     this.onChangeScreenChooseChair = () => {
       this.props.navigation.navigate('Back')
     }
+  }
+
+  componentDidMount() {
+    console.log('ini data sche', this.props.schedules)
   }
   render() {
     return (
@@ -32,7 +44,7 @@ export default class SelectBus extends Component {
           <Text style={{ marginBottom: 20 }}>
             Identitas tiket, ada jam, rating, dan harga
       </Text>
-          <TouchableOpacity onPress={this.onChangeScreenChooseChair}>
+          <TouchableOpacity onPress={() => this.props.getSchedules({})}>
             <CheckBox
               containerStyle={{ backgroundColor: '#fff' }}
               center
@@ -43,6 +55,22 @@ export default class SelectBus extends Component {
 
           </TouchableOpacity>
         </Card>
+        <View>
+          {this.props.schedules && this.props.schedules.map((v, i) => {
+            return (
+              <>
+                <Text>{v.departure_at}</Text>
+                <Text>{v.arrival_at}</Text>
+                <Text>{v.name_agents}</Text>
+                <Text>{v.time}</Text>
+                <Text>{v.name}</Text>
+                <Text>{v.class}</Text>
+                <Text>{v.sheets}</Text>
+                <Text>{v.price}</Text>
+              </>
+            )
+          })}
+        </View>
       </View>
     )
   }
@@ -80,3 +108,9 @@ const styles = StyleSheet.create({
     top: 8
   },
 })
+
+const mapStateToProps = (state) => ({
+  schedules: state.schedules.schedules
+})
+
+export default connect(mapStateToProps, { getSchedules })(SelectBus)

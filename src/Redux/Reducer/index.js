@@ -1,11 +1,12 @@
 import { combineReducers } from 'redux'
-import Login from './AuthLogin/ReducerLogin'
+import Login from './Auth/AuthLogin'
 import Routes from './ReducerRoutes'
-import LogOut from './AuthLogin/ReducerLogOut'
+import Schedules from './ReducerSchedules'
+
 
 export default combineReducers({
   login: Login,
-  logout: LogOut,
-  routes: Routes
+  routes: Routes,
+  schedules: Schedules
 
 })

@@ -27,7 +27,7 @@ import { View, Text, StyleSheet } from 'react-native'
 import { Card, Button, Header, Avatar, ListItem } from 'react-native-elements'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import icon from 'react-native-vector-icons/MaterialIcons'
-import { isLogout } from '../Redux/Actions/AuthLogin/ActionsLogin'
+import { isLogout } from '../Redux/Actions/Auth/AuthLogin'
 import { connect } from 'react-redux'
 
 const list = [
