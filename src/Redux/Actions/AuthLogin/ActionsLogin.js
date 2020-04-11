@@ -1,13 +1,15 @@
 import config from '../../../utils/config'
 import axios from 'axios'
 import AsyncStorage from '@react-native-community/async-storage'
+import { ToastAndroid } from 'react-native'
 
 
-export const Login = (data) => async dispatch => {
+export const isLogin = (data) => async dispatch => {
   try {
     const login = await axios.post(config.APP_BACKEND.concat('auth/login'), data)
-    if (login.data.token === true) {
-      AsyncStorage.setItem('token_user', login.data.token === true)
+    console.log('ini login', login.data.token)
+    if (login.data.token) {
+      AsyncStorage.setItem('token_user', login.data.token)
       dispatch({
         type: 'IS_LOGIN',
         payload: login.data
@@ -19,3 +21,8 @@ export const Login = (data) => async dispatch => {
     console.log(error)
   }
 }
+
+
+export const isLogout = (payload) => ({
+  type: 'IS_LOGOUT'
+})

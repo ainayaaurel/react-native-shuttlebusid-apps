@@ -1,6 +1,6 @@
 
 const initialState = {
-  isLogin: false,
+  sudahLogin: false,
   isLoading: false
 }
 
@@ -9,7 +9,7 @@ const loginReducer = (state = initialState, action) => {
     case 'IS_LOGIN': {
       return {
         ...state,
-        isLogin: true,
+        sudahLogin: true,
         isLoading: true
       }
     }

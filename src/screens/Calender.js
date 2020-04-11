@@ -13,6 +13,7 @@ LocaleConfig.defaultLocale = 'fr';
 
 export default class Calender extends Component {
   render() {
+    console.disableYellowBox = true
     return (
       <Calendar
         // Initially visible month. Default = Date()

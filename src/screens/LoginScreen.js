@@ -4,34 +4,35 @@ import IconBus from 'react-native-vector-icons/FontAwesome5'
 import IconPass from 'react-native-vector-icons/Feather'
 import IconEye from 'react-native-vector-icons/Feather'
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
+import { isLogin } from '../Redux/Actions/AuthLogin/ActionsLogin'
+import { connect } from 'react-redux'
 
 const { width: WIDTH } = Dimensions.get('window')
 
-export default class Login extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
       username: '',
       password: ''
     }
-
-    // AsyncStorage.getItem('token_user', (error, results) => {
-    //   if (results) {
-    //     this.setState({
-    //       username: 
-    //     })
-    //   }
-    // })
-
+    this.submitData = () => {
+      this.setState({ isLoading: true })
+      const data = {
+        username: this.state.username,
+        password: this.state.password,
+      }
+      console.log(data, 'HALE')
+      this.props.isLogin(data)
+      // this.props.navigation.navigate('Home')
+    }
     this.changeScreenRegister = () => {
       this.props.navigation.navigate('Register')
     }
     this.changeScreenForgot = () => {
       this.props.navigation.navigate('ForgotPassword')
     }
-    this.changeScreenLogin = () => {
-      this.props.navigation.navigate('Home')
-    }
+
   }
   render() {
     return (
@@ -48,6 +49,7 @@ export default class Login extends Component {
             placeholder='Username'
             placeholderTextColor='rgba(255,255,255, 0.7)'
             underlineColorAndroid='transparent'
+            onChangeText={(username) => this.setState({ username: username })}
           />
         </View>
         <View style={styles.inputContainer}>
@@ -58,6 +60,7 @@ export default class Login extends Component {
             // secureTextEntry='true'
             placeholderTextColor='rgba(255,255,255, 0.7)'
             underlineColorAndroid='transparent'
+            onChangeText={(password) => this.setState({ password: password })}
           />
           {/* <Feather
             name='eye-off' size={20} color='rgba(255,255,255, 0.7)'
@@ -68,8 +71,8 @@ export default class Login extends Component {
             <Text>Forgot Password?</Text>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity style={styles.btnLogin}>
-          <Text style={styles.textLogin} onPress={this.changeScreenLogin}>LOGIN</Text>
+        <TouchableOpacity style={styles.btnLogin} onPress={this.submitData}>
+          <Text style={styles.textLogin}>LOGIN</Text>
         </TouchableOpacity>
         <View style={styles.createacc}>
           <TouchableOpacity onPress={this.changeScreenRegister}>
@@ -161,8 +164,13 @@ const styles = StyleSheet.create({
     marginLeft: '45%',
     fontSize: 13
   }
-
 })
+const mapStateToProps = (state) => ({
+  login: state.login.login
+})
+
+export default connect(mapStateToProps, { isLogin })(Login)
+
 
 {/* <TouchableOpacity style={styles.btnEye}>
             <IconEye name='eye-off' size={20} color='rgba(255,255,255, 0.7)' />

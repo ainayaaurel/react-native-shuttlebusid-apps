@@ -15,31 +15,22 @@ import { store, persistor } from './src/Redux/store'
 import EditProfile from './src/screens/EditProfile'
 import ChooseChair from './src/screens/SelectaChair'
 import TopUp from './src/screens/TopUp'
+import MainHome from './src/MainHome'
+import { connect } from 'react-redux'
 const Stack = createStackNavigator()
 
 export default class App extends Component {
   render() {
     return (
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name='Login' component={Login} options={{
-            headerShown: false
-          }} />
-          <Stack.Screen name='Register' component={Register} />
-          <Stack.Screen name='ForgotPassword' component={ForgotPassword}
-            options={{ headerShown: false }} />
-          <Stack.Screen name='Home' component={BottomStack} options={{ headerShown: false }} />
-          <Stack.Screen name='Select Bus' component={SelectBus} options={{ headerShown: true }} />
-          <Stack.Screen name='Back' component={ChooseChair} options={{ headerShown: true }} />
-          <Stack.Screen name='Calendar' component={Calendar} options={{ headerShown: false }} />
-          <Stack.Screen name='Edit Profile' component={EditProfile} options={{ headerShown: true }} />
-          <Stack.Screen name='Top Up' component={TopUp}
-            options={{ headerShown: true }} />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <MainHome />
+        </PersistGate>
+      </Provider>
     )
   }
 }
+
 
 // const AppNavigator = createSwitchNavigator({
 //   AuthLoading: AuthLoadingScreen,
@@ -51,11 +42,9 @@ export default class App extends Component {
 
 // function App() {
 //   return (
-//     <Provider store={store}>
-//       <PersistGate loading={null} persistor={persistor}>
+
 //         <AppContainer />
-//       </PersistGate>
-//     </Provider>
+
 //   );
 // }
 

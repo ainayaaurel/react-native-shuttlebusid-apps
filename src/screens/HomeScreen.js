@@ -6,6 +6,8 @@ import { SearchBar } from 'react-native-elements';
 import PickerModal from 'react-native-picker-modal-view';
 import { Card, ListItem, Button, Icon, Header } from 'react-native-elements'
 import Icondots from 'react-native-vector-icons/MaterialCommunityIcons'
+import { getRoutes } from '../Redux/Actions/ActionsRoutes'
+import { connect } from 'react-redux'
 
 const list = [
   { Id: 1, Name: 'Jakarta - Bandung', Value: 'Jakarta - Bandung' },
@@ -13,23 +15,32 @@ const list = [
   { Id: 3, Name: 'Jakarta - Purwokerto', Value: 'Jakarta - Purwokerto' },
   { Id: 4, Name: 'Malang - Surabaya', Value: 'Malang - Surabaya' }
 ]
+// const routeData = this.props.routes.map((v, i) => ({
+//   Id: i,
+//   Name: `${v.departure_at} - ${v.arrival_at}`,
+//   Value: v.id
+// }))
+// console.log('ini route data', routeData)
 
 const { width: WIDTH } = Dimensions.get('window')
 
-export default class HomeScreen extends Component {
+class HomeScreen extends Component {
   constructor(props) {
     super(props)
+    this.props.getRoutes()
     this.changeScreenToBus = () => {
       this.props.navigation.navigate('Select Bus')
     }
     this.changeScreenToCalendar = () => {
       this.props.navigation.navigate('Calendar', { selectdate: (date) => this.updateDate(date) })
     }
+
   }
   state = {
     search: '',
     selectedItems: {},
     date: {}
+
   };
   updateSearch = search => {
     this.setState({ search });
@@ -42,8 +53,11 @@ export default class HomeScreen extends Component {
     console.log(date)
   }
   componentDidMount() {
+    console.log('ini data cuy', this.props.routes)
+    console.log('ini login', this.props.login)
   }
   render() {
+    console.disableYellowBox = true
     return (
       <View>
         <Header
@@ -83,15 +97,24 @@ export default class HomeScreen extends Component {
             <Text>
               {this.state.date.dateString && this.state.date.dateString}
             </Text>
+
           </TouchableOpacity>
           <TouchableOpacity style={styles.btnSearch}>
             <Text style={styles.textSearch} onPress={this.changeScreenToBus}>SEARCH</Text>
           </TouchableOpacity>
         </Card>
+        <View>
+          {this.props.routes.length && this.props.routes.map((v, i) => (
+            <Text>{v.Name}</Text>
+          ))}
+
+        </View>
       </View>
     )
   }
 }
+
+
 
 const styles = StyleSheet.create({
   header: {
@@ -137,6 +160,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff'
   }
 })
+
+const mapStateToProps = (state) => ({
+  routes: state.routes.routes,
+  login: state.login.login
+})
+
+export default connect(mapStateToProps, { getRoutes })(HomeScreen)
+
 
 
 {/* <View style={styles.header}>
