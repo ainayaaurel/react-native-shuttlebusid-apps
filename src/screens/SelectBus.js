@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, ScrollResponderMixin } from 'react-native'
 import { Card, PricingCard, CheckBox } from 'react-native-elements'
 import IconBus from 'react-native-vector-icons/MaterialCommunityIcons'
 import IconSort from 'react-native-vector-icons/FontAwesome5'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler'
 import { Button, Header } from 'native-base'
 import { connect } from 'react-redux'
 import { getSchedules } from '../Redux/Actions/ActionsSchedules'
+import Icon from 'react-native-vector-icons/Ionicons'
 
 class SelectBus extends Component {
   constructor(props) {
@@ -27,51 +28,71 @@ class SelectBus extends Component {
   }
   render() {
     return (
-
-      <View>
-        <View style={styles.header}>
-          <IconBus name='bus-side' size={50} color='#fff' />
-        </View>
-        <View style={styles.headersecond}>
-          <View style={styles.logoContainer}>
-            <IconSort name='sort-amount-down' size={18} color='#000' style={styles.inputIcon} />
-            <Text style={styles.input} > 5 Busses Found </Text>
-          </View>
-        </View>
-        <Card
-          title='Baraya Jaya'
-          style={{ marginTop: 50 }}>
-          <Text style={{ marginBottom: 20 }}>
-            Identitas tiket, ada jam, rating, dan harga
-      </Text>
-          <TouchableOpacity onPress={() => this.props.getSchedules({})}>
-            <CheckBox
-              containerStyle={{ backgroundColor: '#fff' }}
-              center
-              checkedColor='green'
-              title='Click Here'
-              checked={this.onChangeScreenChooseChair}
-            />
-
-          </TouchableOpacity>
-        </Card>
+      <ScrollView>
         <View>
-          {this.props.schedules && this.props.schedules.map((v, i) => {
-            return (
-              <>
-                <Text>{v.departure_at}</Text>
-                <Text>{v.arrival_at}</Text>
-                <Text>{v.name_agents}</Text>
-                <Text>{v.time}</Text>
-                <Text>{v.name}</Text>
-                <Text>{v.class}</Text>
-                <Text>{v.sheets}</Text>
-                <Text>{v.price}</Text>
-              </>
-            )
-          })}
+          <View style={styles.header}>
+            <IconBus name='bus-side' size={50} color='#fff' />
+          </View>
+          <View style={styles.headersecond}>
+            <View style={styles.logoContainer}>
+              <IconSort name='sort-amount-down' size={18} color='#000' style={styles.inputIcon} />
+              <Text style={styles.input} > 5 Busses Found </Text>
+            </View>
+          </View>
+
+          <View>
+            {this.props.schedules && this.props.schedules.map((v, i) => {
+              return (
+
+                <>
+                  <Card style={{ marginTop: 50 }} containerStyle={{ borderRadius: 4 }}>
+                    <Text style={styles.agentName}>{v.name_agents}</Text>
+                    <View style={styles.fixToText}>
+                      <View><Icon name='ios-bus' size={26} color={'#d9d9d9'} /></View>
+                      <Text style={styles.busName}>{v.name}</Text>
+
+                    </View>
+                    <View style={styles.fixToText}>
+                      {/* <View style={styles.start}><Icon name='ios-star' size={20} color={'#d9d9d9'} /></View> */}
+                      <Text style={styles.classBus}>{v.class}</Text>
+                    </View>
+                    <View style={styles.fixToTextSeat}>
+                      <View style={styles.seats}><Icon name='ios-person' size={23} color={'#d9d9d9'} /></View>
+                      <Text>{v.sheets} seats left</Text>
+                    </View>
+                    <View style={{ marginBottom: 20, marginTop: 20 }}>
+                      <View style={styles.fixToText}>
+                        <Text style={styles.route}>Jakarta - Bandung</Text>
+
+                      </View>
+
+                    </View>
+                    <View style={styles.fixToText}>
+                      <TouchableOpacity onPress={() => this.props.getSchedules({})}>
+                        <CheckBox
+                          containerStyle={{ backgroundColor: '#27ae60' }}
+                          iconType='material'
+                          checkedIcon='exit-to-app'
+                          textStyle={{ color: '#fff' }}
+                          checkedColor='#fff'
+                          title='Purchase'
+                          checked={this.onChangeScreenChooseChair}
+                        />
+
+                      </TouchableOpacity>
+                      <Text style={styles.price}>Rp 100.000</Text>
+                    </View>
+                  </Card>
+                </>
+
+
+              )
+            })}
+          </View>
+
         </View>
-      </View>
+      </ScrollView>
+
     )
   }
 }
@@ -82,6 +103,50 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingLeft: 25,
     height: 50
+  },
+  price: {
+    marginTop: 10,
+    marginLeft: 40,
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#27ae60'
+  },
+  route: {
+    fontSize: 14
+  },
+  busName: {
+    marginRight: 1,
+    marginLeft: 10,
+    paddingBottom: 10,
+    fontWeight: 'bold'
+  },
+  seats: {
+    marginLeft: 110,
+    marginRight: 5,
+  },
+  classBus: {
+    marginLeft: 27,
+    marginTop: -9,
+    fontSize: 12,
+    textTransform: 'uppercase',
+    color: '#d9d9d9',
+    borderTopWidth: 1,
+    borderTopColor: '#d9d9d9'
+  },
+  agentName: {
+    marginBottom: 5,
+    fontWeight: 'bold',
+    paddingBottom: 10,
+    borderBottomColor: 'rgba(0,0,0,0.1)',
+    borderBottomWidth: 1
+  },
+  fixToText: {
+    flexDirection: 'row',
+  },
+  fixToTextSeat: {
+    flexDirection: 'row',
+    marginTop: -35,
+    marginLeft: 90
   },
   headersecond: {
     backgroundColor: '#DCDCDC',

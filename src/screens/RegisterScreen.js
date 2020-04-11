@@ -1,16 +1,46 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, Dimensions } from 'react-native'
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler'
+import { connect } from 'react-redux'
+import { isRegister } from '../Redux/Actions/Auth/AuthLogin'
 
 const { width: WIDTH } = Dimensions.get('window')
-export default class RegisterScreen extends Component {
+class RegisterScreen extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      username: '',
+      password: '',
+      name: '',
+      gender: '',
+      address: '',
+      phone: '',
+      email: '',
+    }
+    this.submitData = () => {
+      this.setState({ isLoading: true })
+      const data = {
+        username: this.state.username,
+        password: this.state.password,
+        name: this.state.name,
+        gender: this.state.gender,
+        address: this.state.address,
+        phone: this.state.phone,
+        email: this.state.email,
+      }
+      console.log(data, 'ini daata register')
+      this.props.isRegister(data)
+
+    }
     this.changeScreenLogin = () => {
       this.props.navigation.navigate('Login')
     }
+    this.changeScreenToVerify = () => {
+      this.props.navigation.navigate('Verification')
+    }
   }
   render() {
+    // console.log('hai', this.props.isRegister)
     return (
       <View style={styles.parent}>
         <View>
@@ -19,39 +49,46 @@ export default class RegisterScreen extends Component {
         <View>
           <TextInput
             style={styles.input} placeholder='Your username'
+            onChangeText={(username) => this.setState({ username: username })}
           />
         </View>
         <View>
           <TextInput
             style={styles.input} placeholder='Your password'
+            onChangeText={(password) => this.setState({ password: password })}
           />
         </View>
         <View>
           <TextInput
             style={styles.input} placeholder='Your name'
+            onChangeText={(name) => this.setState({ name: name })}
           />
         </View>
         <View>
           <TextInput
             style={styles.input} placeholder='Your gender'
+            onChangeText={(gender) => this.setState({ gender: gender })}
           />
         </View>
         <View>
           <TextInput
             style={styles.input} placeholder='Your address'
+            onChangeText={(address) => this.setState({ address: address })}
           />
         </View>
         <View>
           <TextInput
             style={styles.input} placeholder='Your phone'
+            onChangeText={(phone) => this.setState({ phone: phone })}
           />
         </View>
         <View>
           <TextInput
             style={styles.input} placeholder='Your email'
+            onChangeText={(email) => this.setState({ email: email })}
           />
         </View>
-        <TouchableOpacity style={styles.btnSignUp}>
+        <TouchableOpacity style={styles.btnSignUp} onPress={this.changeScreenToVerify}>
           <Text style={styles.textSignUp}>Sign Up</Text>
         </TouchableOpacity>
         <View>
@@ -107,3 +144,9 @@ const styles = StyleSheet.create({
     marginTop: 20
   }
 })
+
+const mapStateToProps = (state) => ({
+  register: state.login.isRegister
+})
+
+export default connect(mapStateToProps, { isRegister })(RegisterScreen)

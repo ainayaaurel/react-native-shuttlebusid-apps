@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = (state) => ({
-  logout: state.logout.sudahLogin
+  logout: state.login.sudahLogin
 })
 
 export default connect(mapStateToProps, { isLogout })(Account)

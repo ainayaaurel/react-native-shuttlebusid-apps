@@ -153,11 +153,23 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   createacc: {
-    marginTop: 20
+    marginTop: 20,
+    position: 'relative'
   },
   textCreate: {
     fontSize: 13,
-    textDecorationLine: 'underline'
+    textDecorationLine: 'underline',
+    textAlign: 'center'
+  },
+  textCreateSignUp: {
+
+    fontSize: 13,
+    textDecorationLine: 'underline',
+    position: 'relative',
+    textAlign: 'center',
+    paddingLeft: 200,
+    marginTop: -10
+
   },
   forgot: {
     marginTop: 10,

@@ -1,8 +1,9 @@
 
+
 const initialState = {
   sudahLogin: false,
   isLoading: false,
-  isLogout: false
+  register: {}
 }
 
 const loginReducer = (state = initialState, action) => {
@@ -18,6 +19,12 @@ const loginReducer = (state = initialState, action) => {
         ...state,
         sudahLogin: false,
         // isLogout: true,
+        isLoading: true
+      }
+    } case 'IS_REGISTER': {
+      return {
+        ...state,
+        register: action.payload,
         isLoading: true
       }
     }

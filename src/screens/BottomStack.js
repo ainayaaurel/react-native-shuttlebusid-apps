@@ -31,16 +31,6 @@ export default class HomeScreen extends Component {
             )
           }} />
         <BottomTab.Screen
-          component={Inbox}
-          name='LogOut'
-          options={{
-            tabBarLabel: 'Log-Out',
-            tabBarIcon: ({ color, size }) => (
-              <IconInbox name='logout' color={color} size={size} />
-            )
-          }}
-        />
-        <BottomTab.Screen
           component={MyOrder}
           name='My Order: '
           options={{
@@ -50,7 +40,7 @@ export default class HomeScreen extends Component {
             )
           }}
         />
-        <BottomTab.Screen
+        {/* <BottomTab.Screen
           component={Payment}
           name='Payment '
           options={{
@@ -59,7 +49,7 @@ export default class HomeScreen extends Component {
               <IconPayment name='payment' color={color} size={size} />
             )
           }}
-        />
+        /> */}
         <BottomTab.Screen
           component={Account}
           name='Account'

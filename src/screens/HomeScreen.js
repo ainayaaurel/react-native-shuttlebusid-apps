@@ -52,11 +52,12 @@ class HomeScreen extends Component {
   };
   updateDate = date => {
     this.setState({ date });
-    console.log(date)
+    // console.log(date)
   }
   componentDidMount() {
-    console.log('ini data cuy', this.props.routes)
-    console.log('ini login', this.props.login)
+
+    // console.log('ini data cuy', this.props.routes)
+    // console.log('ini login', this.props.login)
   }
   render() {
     console.disableYellowBox = true
@@ -72,13 +73,13 @@ class HomeScreen extends Component {
           <Text style={{ marginBottom: 10 }}>
             Departure - Arrival
           </Text>
-          <PickerModal
+          {this.props.routes && <PickerModal
             onSelected={this.selected}
             value={this.state.selectedItems}
             onSelected={(selected) => this.selected(selected)}
             onRequestClosed={() => console.warn('closed...')}
             onBackRequest={() => console.warn('back key pressed')}
-            items={list}
+            items={this.props.routes}
             sortingLanguage={'tr'}
             showToTopButton={true}
             defaultSelected={this.state.selectedItem}
@@ -88,7 +89,7 @@ class HomeScreen extends Component {
             searchText={'Search...'}
             forceSelect={false}
             autoSort={true}
-          />
+          />}
           <Text style={{ marginBottom: 10, fontSize: 18 }}>
             Date
           </Text>
@@ -105,12 +106,6 @@ class HomeScreen extends Component {
             <Text style={styles.textSearch} onPress={this.changeScreenToBus}>SEARCH</Text>
           </TouchableOpacity>
         </Card>
-        <View>
-          {this.props.routes.length && this.props.routes.map((v, i) => (
-            <Text>{v.Name}</Text>
-          ))}
-
-        </View>
       </View>
     )
   }
