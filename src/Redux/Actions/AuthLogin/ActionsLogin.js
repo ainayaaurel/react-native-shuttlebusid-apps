@@ -22,7 +22,7 @@ export const isLogin = (data) => async dispatch => {
   }
 }
 
-
-export const isLogout = (payload) => ({
+export const isLogout = () => ({
   type: 'IS_LOGOUT'
 })
+

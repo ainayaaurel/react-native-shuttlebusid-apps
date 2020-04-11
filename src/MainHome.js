@@ -27,6 +27,8 @@ class MainHome extends Component {
             : <Stack.Screen name='Login' component={Login} options={{
               headerShown: false
             }} />}
+          {/* {this.props.logou} */}
+
 
           <Stack.Screen name='Register' component={Register} />
           <Stack.Screen name='ForgotPassword' component={ForgotPassword}
@@ -46,7 +48,7 @@ class MainHome extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    login: state.login.sudahLogin
+    login: state.login.sudahLogin,
   }
 }
 

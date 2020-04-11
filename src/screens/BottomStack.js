@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import IconHistory from 'react-native-vector-icons/FontAwesome5'
 import IconInbox from 'react-native-vector-icons/MaterialIcons'
 import IconPayment from 'react-native-vector-icons/MaterialIcons'
+import IconLogout from 'react-native-vector-icons/AntDesign'
 import Home from './HomeScreen'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Account from './Account'
@@ -31,11 +32,11 @@ export default class HomeScreen extends Component {
           }} />
         <BottomTab.Screen
           component={Inbox}
-          name='Inbox'
+          name='LogOut'
           options={{
-            tabBarLabel: 'Inbox',
+            tabBarLabel: 'Log-Out',
             tabBarIcon: ({ color, size }) => (
-              <IconInbox name='message' color={color} size={size} />
+              <IconInbox name='logout' color={color} size={size} />
             )
           }}
         />

@@ -27,6 +27,8 @@ import { View, Text, StyleSheet } from 'react-native'
 import { Card, Button, Header, Avatar, ListItem } from 'react-native-elements'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import icon from 'react-native-vector-icons/MaterialIcons'
+import { isLogout } from '../Redux/Actions/AuthLogin/ActionsLogin'
+import { connect } from 'react-redux'
 
 const list = [
   {
@@ -34,9 +36,14 @@ const list = [
     icon: 'payment'
   },
 ]
-export default class Account extends Component {
+
+class Account extends Component {
   constructor(props) {
     super(props)
+    // this.props.isLogout()
+    this.changeScreenToLogin = () => {
+      this.props.navigation.navigate('Login')
+    }
     this.changeScreenEditProfile = () => {
       this.props.navigation.navigate('Edit Profile')
     }
@@ -45,6 +52,7 @@ export default class Account extends Component {
     }
   }
   render() {
+    console.log(this.props.logout)
     return (
       <View>
         <View>
@@ -97,6 +105,9 @@ export default class Account extends Component {
                 }
               </TouchableOpacity>
             </Card>
+            <TouchableOpacity onPress={() => this.props.isLogout({})}>
+              <Text>LogOut</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </View >
@@ -114,3 +125,9 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   }
 })
+
+const mapStateToProps = (state) => ({
+  logout: state.logout.sudahLogin
+})
+
+export default connect(mapStateToProps, { isLogout })(Account)
