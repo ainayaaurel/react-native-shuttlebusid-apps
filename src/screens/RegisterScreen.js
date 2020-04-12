@@ -17,7 +17,7 @@ class RegisterScreen extends Component {
       phone: '',
       email: '',
     }
-    this.submitData = () => {
+    this.submitData = async () => {
       this.setState({ isLoading: true })
       const data = {
         username: this.state.username,
@@ -29,15 +29,16 @@ class RegisterScreen extends Component {
         email: this.state.email,
       }
       console.log(data, 'ini daata register')
-      this.props.isRegister(data)
-
+      await this.props.isRegister(data)
+      this.props.navigation.navigate('Verification')
+      // this.changeScreenToVerify = () => {
+      //   this.props.navigation.navigate('Verification')
+      // }
     }
     this.changeScreenLogin = () => {
       this.props.navigation.navigate('Login')
     }
-    this.changeScreenToVerify = () => {
-      this.props.navigation.navigate('Verification')
-    }
+
   }
   render() {
     // console.log('hai', this.props.isRegister)
@@ -88,7 +89,7 @@ class RegisterScreen extends Component {
             onChangeText={(email) => this.setState({ email: email })}
           />
         </View>
-        <TouchableOpacity style={styles.btnSignUp} onPress={this.changeScreenToVerify}>
+        <TouchableOpacity style={styles.btnSignUp} onPress={this.submitData}>
           <Text style={styles.textSignUp}>Sign Up</Text>
         </TouchableOpacity>
         <View>

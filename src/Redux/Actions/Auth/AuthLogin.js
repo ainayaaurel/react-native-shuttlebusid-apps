@@ -45,3 +45,23 @@ export const isRegister = (data) => async dispatch => {
     console.log(error)
   }
 }
+
+export const isVerification = (data) => async dispatch => {
+  const username = data.username
+  const code = data.code
+  try {
+    const query = `auth/verify?username=${username}&code=${code}`
+    console.log(query)
+    const res = await axios.get(config.APP_BACKEND.concat(query))
+    if (res.data.success) {
+      dispatch({
+        type: 'IS_VERIFICATION',
+        payload: res.data.success
+      })
+    } else {
+      ToastAndroid.show('Verification Failed', ToastAndroid.SHORT)
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}

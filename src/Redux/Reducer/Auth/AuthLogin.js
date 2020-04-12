@@ -3,7 +3,8 @@
 const initialState = {
   sudahLogin: false,
   isLoading: false,
-  register: {}
+  register: {},
+  verification: {}
 }
 
 const loginReducer = (state = initialState, action) => {
@@ -26,6 +27,13 @@ const loginReducer = (state = initialState, action) => {
         ...state,
         register: action.payload,
         isLoading: true
+      }
+    } case 'IS_VERIFICATION': {
+      return {
+        ...state,
+        verification: action.payload,
+        isLoading: true
+
       }
     }
     default:

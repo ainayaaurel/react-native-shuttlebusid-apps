@@ -3,10 +3,28 @@ import { View, Text, StyleSheet, TextInput, Dimensions } from 'react-native'
 import IconLock from 'react-native-vector-icons/AntDesign'
 import Icon from 'react-native-vector-icons/FontAwesome5'
 import { TouchableOpacity } from 'react-native-gesture-handler'
+import { connect } from 'react-redux'
+import { isVerification } from '../Redux/Actions/Auth/AuthLogin'
 
 
 const { width: WIDTH } = Dimensions.get('window')
-export default class VerifyCode extends Component {
+class VerifyCode extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: '',
+      code: 0
+    }
+    this.submitData = async () => {
+      this, this.setState({ isLoading: true })
+      const data = {
+        username: this.state.username,
+        code: this.state.code
+      }
+      await this.props.isVerification(data)
+      this.props.navigation.navigate('Login')
+    }
+  }
   render() {
     return (
       <View style={styles.parent}>
@@ -17,13 +35,21 @@ export default class VerifyCode extends Component {
         <View style={styles.inputContainer}>
           <TextInput
             style={styles.textInput}
+            placeholder='username'
+            placeholderTextColor='rgba(255,255,255, 0.7)'
+            underlineColorAndroid='transparent'
+            onChangeText={(username) => this.setState({ username: username })}
+          />
+          <TextInput
+            style={styles.textInput}
             placeholder='Code'
             placeholderTextColor='rgba(255,255,255, 0.7)'
             underlineColorAndroid='transparent'
+            onChangeText={(code) => this.setState({ code: code })}
           />
         </View>
         <View style={styles.btnReset}>
-          <TouchableOpacity onPress={() => alert('Verification Succes')}>
+          <TouchableOpacity onPress={this.submitData}>
             <Text style={styles.textReset}>SEND CODE</Text>
           </TouchableOpacity>
         </View>
@@ -81,5 +107,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#fff'
   },
-
 })
+
+const mapStateToProps = (state) => ({
+  verification: state.login.isVerification
+})
+
+export default connect(mapStateToProps, { isVerification })(VerifyCode)
+
+// onPress={() => alert('Verification Succes')}
