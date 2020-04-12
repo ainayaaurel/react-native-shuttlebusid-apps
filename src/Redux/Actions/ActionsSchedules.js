@@ -1,9 +1,11 @@
 import config from '../../utils/config'
 import axios from 'axios'
 
-export const getSchedules = () => async dispatch => {
+export const getSchedules = (departure_at) => async dispatch => {
   try {
-    const res = await axios.get(config.APP_BACKEND.concat('schedules'))
+    query = `schedules?search[value]=${departure_at}`
+    console.log('ini query', query)
+    const res = await axios.get(config.APP_BACKEND.concat(query))
     console.log('ini schedules', res)
     if (res.data.data) {
       dispatch({

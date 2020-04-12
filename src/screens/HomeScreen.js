@@ -30,7 +30,7 @@ class HomeScreen extends Component {
     super(props)
     this.props.getRoutes()
     this.changeScreenToBus = () => {
-      this.props.navigation.navigate('Select Bus')
+      this.props.navigation.navigate('Select Bus', { data: this.state.selectedItems.Value })
     }
 
     this.changeScreenToCalendar = () => {
@@ -49,7 +49,10 @@ class HomeScreen extends Component {
   };
   selected = selectedItems => {
     this.setState({ selectedItems })
+
+    console.log('selected', selectedItems)
   };
+
   updateDate = date => {
     this.setState({ date });
     // console.log(date)
@@ -74,8 +77,9 @@ class HomeScreen extends Component {
             Departure - Arrival
           </Text>
           {this.props.routes && <PickerModal
-            onSelected={this.selected}
+
             value={this.state.selectedItems}
+
             onSelected={(selected) => this.selected(selected)}
             onRequestClosed={() => console.warn('closed...')}
             onBackRequest={() => console.warn('back key pressed')}

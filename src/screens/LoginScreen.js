@@ -14,7 +14,10 @@ class Login extends Component {
     super(props);
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      showPass: true,
+      press: false,
+      iconEye: 'eye-off'
     }
     this.submitData = () => {
       this.setState({ isLoading: true })
@@ -31,6 +34,15 @@ class Login extends Component {
     }
     this.changeScreenForgot = () => {
       this.props.navigation.navigate('ForgotPassword')
+    }
+
+    showPass = () => {
+
+      if (this.state.press === false) {
+        this.setState({ showPass: !this.state.showPass, press: !this.state.press });
+      } else {
+        this.setState({ showPass: this.state.showPass, press: this.state.press })
+      }
     }
 
   }
@@ -57,14 +69,18 @@ class Login extends Component {
           <TextInput
             style={styles.input}
             placeholder='Password'
-            // secureTextEntry='true'
+            secureTextEntry={this.state.showPass}
             placeholderTextColor='rgba(255,255,255, 0.7)'
             underlineColorAndroid='transparent'
             onChangeText={(password) => this.setState({ password: password })}
           />
-          {/* <Feather
-            name='eye-off' size={20} color='rgba(255,255,255, 0.7)'
-          /> */}
+          <TouchableOpacity
+            style={styles.btnEye}
+            onPress={this.showPass}>
+            <IconEye
+              name={this.state.iconEye} size={20} color='rgba(255,255,255, 0.7)' />
+
+          </TouchableOpacity>
         </View>
         <View style={styles.forgot}>
           <TouchableOpacity onPress={this.changeScreenForgot}>
@@ -106,8 +122,7 @@ const styles = StyleSheet.create({
     color: 'rgba(255, 255, 255, 0.7)'
   },
   inputContainer: {
-    position: 'relative',
-    marginTop: 10,
+    marginBottom: 10,
   },
   inputIcon: {
     position: 'absolute',
@@ -132,9 +147,9 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   btnEye: {
-    // position: 'absolute',
-    // top: 9,
-    // right: 37
+    position: 'absolute',
+    top: 9,
+    right: 37,
     marginLeft: 250,
     // marginTop: -50,
     // zIndex: 99

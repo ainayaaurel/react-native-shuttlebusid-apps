@@ -1,33 +1,11 @@
-// import { SearchBar } from 'react-native-elements';
-
-// export default class App extends React.Component {
-//   state = {
-//     search: '',
-//   };
-
-//   updateSearch = search => {
-//     this.setState({ search });
-//   };
-
-//   render() {
-//     const { search } = this.state;
-
-//     return (
-//       <SearchBar
-//         placeholder="Type Here..."
-//         onChangeText={this.updateSearch}
-//         value={search}
-//       />
-//     );
-//   }
-// }
 
 import React, { Component } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { Card, Button, Header, Avatar, ListItem } from 'react-native-elements'
-import { TouchableOpacity } from 'react-native-gesture-handler'
 import icon from 'react-native-vector-icons/MaterialIcons'
+import IconLogout from 'react-native-vector-icons/AntDesign'
 import { isLogout } from '../Redux/Actions/Auth/AuthLogin'
+import { getMyAccount } from '../Redux/Actions/ActionsProfil'
 import { connect } from 'react-redux'
 
 const list = [
@@ -40,7 +18,8 @@ const list = [
 class Account extends Component {
   constructor(props) {
     super(props)
-    // this.props.isLogout()
+    this.props.getMyAccount()
+
     this.changeScreenToLogin = () => {
       this.props.navigation.navigate('Login')
     }
@@ -50,6 +29,10 @@ class Account extends Component {
     this.changeScreenTopUp = () => {
       this.props.navigation.navigate('Top Up')
     }
+  }
+
+  componentDidMount() {
+    console.log('ini data akun', this.props.usersdetails)
   }
   render() {
     console.log(this.props.logout)
@@ -61,33 +44,42 @@ class Account extends Component {
             centerComponent={{ text: 'MY ACCOUNT', style: { color: '#fff' } }}
             rightComponent={{ icon: 'menu', color: '#fff' }}
           />
-          <Card style={{ height: 80 }}
-          >
-            <Avatar
-              size='large'
-              rounded
-              source={{
-                uri:
-                  'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-              }}
-              showEditButton
-            />
-            <Text style={{ position: 'absolute', marginTop: 15, paddingLeft: 100 }}>
-              Dinda Ayu
-          </Text>
-            <Text style={{ position: 'absolute', marginTop: 35, paddingLeft: 100 }}>
-              Balance : Rp
-          </Text>
-            <TouchableOpacity style={styles.touchedit} onPress={this.changeScreenEditProfile} >
-              <Text style={styles.textEdit}>
-                EDIT PROFILE
-            </Text>
-            </TouchableOpacity>
-            {/* <Button
-              // icon={<Icon name='code' color='#ffffff' />}
+          <View>
+            {/* {this.props.usersdetails && this.props.usersdetails.map((v, i) => {
+              return (
+                <> */}
+            <Card style={{ height: 80 }}
+            >
+              <Avatar
+                size='large'
+                rounded
+                source={{
+                  uri:
+                    'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
+                }}
+                showEditButton
+              />
+              <Text style={{ position: 'absolute', marginTop: 15, paddingLeft: 100 }}>
+                Dinda Ayu
+                     </Text>
+              <Text style={{ position: 'absolute', marginTop: 35, paddingLeft: 100 }}> Balance</Text>
+              <Text style={{ position: 'absolute', marginTop: 55, paddingLeft: 100 }}> Balance</Text>
+              <TouchableOpacity style={styles.touchedit} onPress={this.changeScreenEditProfile} >
+                <Text style={styles.textEdit}>
+                  EDIT PROFILE
+                    </Text>
+              </TouchableOpacity>
+              {/* <Button
+              icon= <Icon name='code' color='#ffffff' />
               buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, marginTop: 20 }}
               title='Edit Profile' /> */}
-          </Card>
+            </Card>
+            {/* </>
+
+              )
+            })} */}
+
+          </View>
           <View>
             <Card>
               <TouchableOpacity onPress={this.changeScreenTopUp}>
@@ -106,7 +98,9 @@ class Account extends Component {
               </TouchableOpacity>
             </Card>
             <TouchableOpacity onPress={() => this.props.isLogout({})}>
-              <Text>LogOut</Text>
+              <IconLogout name='logout' size={30} color='black'
+                style={styles.IconLogout} />
+              <Text style={{ fontSize: 15, textAlign: 'center', marginTop: 10 }}>Logout</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -123,11 +117,17 @@ const styles = StyleSheet.create({
     color: '#569248',
     fontWeight: 'bold',
     textAlign: 'center'
+  },
+  IconLogout: {
+    textAlign: 'center',
+    marginTop: 50
+
   }
 })
 
 const mapStateToProps = (state) => ({
-  logout: state.login.sudahLogin
+  logout: state.login.sudahLogin,
+  profile: state.account.usersdetails
 })
 
-export default connect(mapStateToProps, { isLogout })(Account)
+export default connect(mapStateToProps, { isLogout, getMyAccount })(Account)

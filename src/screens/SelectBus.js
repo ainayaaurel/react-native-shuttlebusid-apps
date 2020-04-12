@@ -12,9 +12,7 @@ import Icon from 'react-native-vector-icons/Ionicons'
 class SelectBus extends Component {
   constructor(props) {
     super(props)
-    this.props.getSchedules()
-
-
+    this.props.getSchedules(this.props.route.params.data)
     this.changeScreenToHome = () => {
       this.props.navigation.navigate('Home')
     }
@@ -30,9 +28,9 @@ class SelectBus extends Component {
     return (
       <ScrollView>
         <View>
-          <View style={styles.header}>
+          {/* <View style={styles.header}>
             <IconBus name='bus-side' size={50} color='#fff' />
-          </View>
+          </View> */}
           <View style={styles.headersecond}>
             <View style={styles.logoContainer}>
               <IconSort name='sort-amount-down' size={18} color='#000' style={styles.inputIcon} />
@@ -62,7 +60,7 @@ class SelectBus extends Component {
                     </View>
                     <View style={{ marginBottom: 20, marginTop: 20 }}>
                       <View style={styles.fixToText}>
-                        <Text style={styles.route}>Jakarta - Bandung</Text>
+                        <Text style={styles.route}>{v.departure_at} - {v.arrival_at}</Text>
 
                       </View>
 
@@ -80,11 +78,10 @@ class SelectBus extends Component {
                         />
 
                       </TouchableOpacity>
-                      <Text style={styles.price}>Rp 100.000</Text>
+                      <Text style={styles.price}>Rp {v.price}</Text>
                     </View>
                   </Card>
                 </>
-
 
               )
             })}

@@ -7,7 +7,7 @@ export const getRoutes = () => async dispatch => {
     let routes = res.data.data.map((data, index) => ({
       Id: index,
       Name: `${data.departure_at} - ${data.arrival_at}`,
-      Value: data.id
+      Value: data.departure_at
     }))
     console.log('BUBGGGGGG', routes)
     if (res.data.data) {

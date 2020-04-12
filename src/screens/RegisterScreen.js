@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, Dimensions } from 'react-native'
-import { TextInput, TouchableOpacity } from 'react-native-gesture-handler'
+import { TextInput, TouchableOpacity, ScrollView } from 'react-native-gesture-handler'
 import { connect } from 'react-redux'
 import { isRegister } from '../Redux/Actions/Auth/AuthLogin'
 
@@ -43,61 +43,63 @@ class RegisterScreen extends Component {
   render() {
     // console.log('hai', this.props.isRegister)
     return (
-      <View style={styles.parent}>
-        <View>
-          <Text style={styles.title}>Create your account</Text>
-        </View>
-        <View>
-          <TextInput
-            style={styles.input} placeholder='Your username'
-            onChangeText={(username) => this.setState({ username: username })}
-          />
-        </View>
-        <View>
-          <TextInput
-            style={styles.input} placeholder='Your password'
-            onChangeText={(password) => this.setState({ password: password })}
-          />
-        </View>
-        <View>
-          <TextInput
-            style={styles.input} placeholder='Your name'
-            onChangeText={(name) => this.setState({ name: name })}
-          />
-        </View>
-        <View>
-          <TextInput
-            style={styles.input} placeholder='Your gender'
-            onChangeText={(gender) => this.setState({ gender: gender })}
-          />
-        </View>
-        <View>
-          <TextInput
-            style={styles.input} placeholder='Your address'
-            onChangeText={(address) => this.setState({ address: address })}
-          />
-        </View>
-        <View>
-          <TextInput
-            style={styles.input} placeholder='Your phone'
-            onChangeText={(phone) => this.setState({ phone: phone })}
-          />
-        </View>
-        <View>
-          <TextInput
-            style={styles.input} placeholder='Your email'
-            onChangeText={(email) => this.setState({ email: email })}
-          />
-        </View>
-        <TouchableOpacity style={styles.btnSignUp} onPress={this.submitData}>
-          <Text style={styles.textSignUp}>Sign Up</Text>
-        </TouchableOpacity>
-        <View>
-          <TouchableOpacity style={styles.login}>
-            <Text style={styles.textLogIn} onPress={this.changeScreenLogin}>Already have an account yet? Log In</Text>
+      <ScrollView>
+        <View style={styles.parent}>
+          <View>
+            <Text style={styles.title}>Create your account</Text>
+          </View>
+          <View>
+            <TextInput
+              style={styles.input} placeholder='Your username'
+              onChangeText={(username) => this.setState({ username: username })}
+            />
+          </View>
+          <View>
+            <TextInput
+              style={styles.input} placeholder='Your password'
+              onChangeText={(password) => this.setState({ password: password })}
+            />
+          </View>
+          <View>
+            <TextInput
+              style={styles.input} placeholder='Your name'
+              onChangeText={(name) => this.setState({ name: name })}
+            />
+          </View>
+          <View>
+            <TextInput
+              style={styles.input} placeholder='Your gender'
+              onChangeText={(gender) => this.setState({ gender: gender })}
+            />
+          </View>
+          <View>
+            <TextInput
+              style={styles.input} placeholder='Your address'
+              onChangeText={(address) => this.setState({ address: address })}
+            />
+          </View>
+          <View>
+            <TextInput
+              style={styles.input} placeholder='Your phone'
+              onChangeText={(phone) => this.setState({ phone: phone })}
+            />
+          </View>
+          <View>
+            <TextInput
+              style={styles.input} placeholder='Your email'
+              onChangeText={(email) => this.setState({ email: email })}
+            />
+          </View>
+          <TouchableOpacity style={styles.btnSignUp} onPress={this.submitData}>
+            <Text style={styles.textSignUp}>Sign Up</Text>
           </TouchableOpacity>
+          <View>
+            <TouchableOpacity style={styles.login}>
+              <Text style={styles.textLogIn} onPress={this.changeScreenLogin}>Already have an account yet? Log In</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
+      </ScrollView>
     )
   }
 }

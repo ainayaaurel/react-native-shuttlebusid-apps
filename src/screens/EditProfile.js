@@ -9,6 +9,9 @@ export default class EditProfile extends Component {
     this.changeScreenLogin = () => {
       this.props.navigation.navigate('Edit Profile')
     }
+    this.changeScreenToAccount = () => {
+      this, props.navigation.navigate('Account')
+    }
   }
   render() {
     return (
@@ -46,7 +49,7 @@ export default class EditProfile extends Component {
             style={styles.input} placeholder='Your name' underlineColorAndroid='#569248'
           />
         </View>
-        <TouchableOpacity style={styles.btnSignUp}>
+        <TouchableOpacity style={styles.btnSignUp} onPress={this.changeScreenToAccount}>
           <Text style={styles.textSave}>SAVE</Text>
         </TouchableOpacity>
       </View>
