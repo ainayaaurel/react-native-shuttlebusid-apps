@@ -1,14 +1,18 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, ScrollResponderMixin } from 'react-native'
+import { View, Text, StyleSheet, ScrollResponderMixin, Dimensions } from 'react-native'
 import { Card, PricingCard, CheckBox } from 'react-native-elements'
 import IconBus from 'react-native-vector-icons/MaterialCommunityIcons'
 import IconSort from 'react-native-vector-icons/FontAwesome5'
+import IconTime from 'react-native-vector-icons/MaterialCommunityIcons'
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler'
 import { Button, Header } from 'native-base'
 import { connect } from 'react-redux'
 import { getSchedules } from '../Redux/Actions/ActionsSchedules'
 import Icon from 'react-native-vector-icons/Ionicons'
 
+
+
+const { width: WIDTH } = Dimensions.get('window')
 class SelectBus extends Component {
   constructor(props) {
     super(props)
@@ -18,6 +22,9 @@ class SelectBus extends Component {
     }
     this.onChangeScreenChooseChair = () => {
       this.props.navigation.navigate('Back')
+    }
+    this.changeScreenToPayment = () => {
+      this.props.navigation.navigate('Payment Confirmation')
     }
   }
 
@@ -31,12 +38,12 @@ class SelectBus extends Component {
           {/* <View style={styles.header}>
             <IconBus name='bus-side' size={50} color='#fff' />
           </View> */}
-          <View style={styles.headersecond}>
+          {/* <View style={styles.headersecond}>
             <View style={styles.logoContainer}>
               <IconSort name='sort-amount-down' size={18} color='#000' style={styles.inputIcon} />
               <Text style={styles.input} > 5 Busses Found </Text>
             </View>
-          </View>
+          </View> */}
 
           <View>
             {this.props.schedules && this.props.schedules.map((v, i) => {
@@ -61,12 +68,16 @@ class SelectBus extends Component {
                     <View style={{ marginBottom: 20, marginTop: 20 }}>
                       <View style={styles.fixToText}>
                         <Text style={styles.route}>{v.departure_at} - {v.arrival_at}</Text>
-
                       </View>
-
+                      <View style={styles.fixToTextSeat}>
+                        <View style={styles.seats}>
+                          <IconTime name='clock-outline' size={23} color={'#d9d9d9'} />
+                        </View>
+                        <Text>{v.time}</Text>
+                      </View>
                     </View>
                     <View style={styles.fixToText}>
-                      <TouchableOpacity onPress={() => this.props.getSchedules({})}>
+                      <TouchableOpacity onPress={this.changeScreenToPayment} >
                         <CheckBox
                           containerStyle={{ backgroundColor: '#27ae60' }}
                           iconType='material'
@@ -74,25 +85,24 @@ class SelectBus extends Component {
                           textStyle={{ color: '#fff' }}
                           checkedColor='#fff'
                           title='Purchase'
-                          checked={this.onChangeScreenChooseChair}
+                          checked={this.changeScreenToPayment}
                         />
-
                       </TouchableOpacity>
                       <Text style={styles.price}>Rp {v.price}</Text>
                     </View>
                   </Card>
                 </>
-
               )
             })}
           </View>
-
         </View>
       </ScrollView>
 
     )
   }
 }
+
+// onPress={() => this.props.getSchedules({})}
 
 const styles = StyleSheet.create({
   header: {

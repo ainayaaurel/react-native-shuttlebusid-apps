@@ -1,27 +1,12 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, Dimensions, TouchableOpacity } from 'react-native'
 import IconBus from 'react-native-vector-icons/FontAwesome5'
-import { TextInput } from 'react-native-gesture-handler'
-import { SearchBar } from 'react-native-elements';
 import PickerModal from 'react-native-picker-modal-view';
-import { Card, ListItem, Button, Icon, Header } from 'react-native-elements'
+import { Card, Header } from 'react-native-elements'
 import Icondots from 'react-native-vector-icons/MaterialCommunityIcons'
 import { getRoutes } from '../Redux/Actions/ActionsRoutes'
 
 import { connect } from 'react-redux'
-
-const list = [
-  { Id: 1, Name: 'Jakarta - Bandung', Value: 'Jakarta - Bandung' },
-  { Id: 2, Name: 'Bandung - Bogor', Value: 'Bandung - Bogor' },
-  { Id: 3, Name: 'Jakarta - Purwokerto', Value: 'Jakarta - Purwokerto' },
-  { Id: 4, Name: 'Malang - Surabaya', Value: 'Malang - Surabaya' }
-]
-// const routeData = this.props.routes.map((v, i) => ({
-//   Id: i,
-//   Name: `${v.departure_at} - ${v.arrival_at}`,
-//   Value: v.id
-// }))
-// console.log('ini route data', routeData)
 
 const { width: WIDTH } = Dimensions.get('window')
 
@@ -164,7 +149,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => ({
   routes: state.routes.routes,
-  login: state.login.login,
+  login: state.login.sudahlogin,
 
 })
 

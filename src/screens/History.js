@@ -14,8 +14,13 @@ export default class MyOrder extends Component {
         />
         <View style={localStyle.headersecond}>
           <View style={localStyle.box1}>
-            <Text style={localStyle.input}> CODE BOOKING : IH45ZQ </Text>
-            <IconBarcode name="barcode" size={70} color="black" />
+            <Text style={localStyle.inputDeparture}> Departure Date</Text>
+            <Text style={localStyle.input}> Route : Bandung - Jakarta</Text>
+            <Text style={localStyle.input}> Date : 18-04-2020</Text>
+            <Text style={localStyle.input}> Time : 09:00:00</Text>
+            <Text style={localStyle.inputTicket}> Ticket Price</Text>
+            <Text style={localStyle.input}> Price : Rp 120.000</Text>
+            <Text style={localStyle.input}> Total :  Rp 120.000</Text>
           </View>
         </View>
       </View>
@@ -26,7 +31,7 @@ export default class MyOrder extends Component {
 const localStyle = StyleSheet.create({
   headerContainer: {
     backgroundColor: '#15B105',
-    justifyContent: 'space-around',
+    // justifyContent: 'space-around',
     marginTop: -20,
     height: 80,
   },
@@ -34,19 +39,34 @@ const localStyle = StyleSheet.create({
     backgroundColor: '#fff',
     justifyContent: 'center',
     paddingLeft: 25,
-    height: 100,
-    marginTop: 10,
+    height: 500,
+    marginTop: 20,
   },
   input: {
     top: 8,
-    fontSize: 13,
+    fontSize: 15,
     fontWeight: 'bold',
     color: 'grey',
     marginBottom: 5,
+    paddingLeft: 10
+  },
+  inputDeparture: {
+    top: 8,
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'black',
+    marginBottom: 17,
+  },
+  inputTicket: {
+    top: 8,
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'black',
+    marginBottom: 17,
   },
   box1: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    // justifyContent: 'center',
+    // alignItems: 'center',
     // marginBottom: 90,
   },
 });

@@ -10,6 +10,7 @@ import EditProfile from '../src/screens/EditProfile'
 import ChooseChair from '../src/screens/SelectaChair'
 import TopUp from '../src/screens/TopUp'
 import VerifyCode from '../src/screens/VerifyCode'
+import Payment from '../src/screens/Payment'
 import RegisterScreen from '../src/screens/RegisterScreen'
 const Stack = createStackNavigator()
 import { connect } from 'react-redux'
@@ -26,10 +27,6 @@ class MainHome extends Component {
           {this.props.login ?
             <Stack.Screen name='Home' component={BottomStack} options={{ headerShown: false }} />
             : <Stack.Screen name='Login' component={Login} options={{ headerShown: false }} />}
-          {/* {this.props.isRegister ?
-            <Stack.Screen name='Verify Code' component={VerifyCode} options={{ headerShown: true }} />
-            : <Stack.Screen name='Register' component={RegisterScreen} />} */}
-
           <Stack.Screen name='Register' component={RegisterScreen} />
           <Stack.Screen name='Verification' component={VerifyCode} options={{ headerShown: true }} />
           <Stack.Screen name='ForgotPassword' component={ForgotPassword}
@@ -40,6 +37,7 @@ class MainHome extends Component {
           <Stack.Screen name='Calendar' component={Calendar} options={{ headerShown: false }} />
           <Stack.Screen name='Edit Profile' component={EditProfile} options={{ headerShown: true }} />
           <Stack.Screen name='Top Up' component={TopUp} options={{ headerShown: true }} />
+          <Stack.Screen name='Payment Confirmation' component={Payment} options={{ headerShown: true }} />
 
 
         </Stack.Navigator>

@@ -1,9 +1,15 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, Dimensions } from 'react-native'
 import { TextInput, TouchableOpacity, ScrollView } from 'react-native-gesture-handler'
+import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
 import { connect } from 'react-redux'
 import { isRegister } from '../Redux/Actions/Auth/AuthLogin'
 
+
+// var radio_props = [
+//   { label: 'Male', value: 0 },
+//   { label: 'Female', value: 1 }
+// ];
 const { width: WIDTH } = Dimensions.get('window')
 class RegisterScreen extends Component {
   constructor(props) {
@@ -68,9 +74,14 @@ class RegisterScreen extends Component {
           </View>
           <View>
             <TextInput
-              style={styles.input} placeholder='Your gender'
+              style={styles.input} placeholder='Your gender (Male/Female)'
               onChangeText={(gender) => this.setState({ gender: gender })}
             />
+            {/* <RadioForm
+              radio_props={radio_props}
+              initial={0}
+              onPress={(value) => { this.setState({ value: value }) }}
+            /> */}
           </View>
           <View>
             <TextInput
@@ -120,9 +131,17 @@ const styles = StyleSheet.create({
     width: WIDTH - 65,
     height: 45,
     fontSize: 16,
-    // backgroundColor: 'rgba(0,0,0,0.35)',
     color: 'black',
     borderBottomWidth: 1,
+    alignSelf: 'stretch',
+    marginBottom: 15
+  },
+  inputgender: {
+    width: WIDTH - 65,
+    height: 45,
+    fontSize: 16,
+    color: 'black',
+    // borderBottomWidth: 1,
     alignSelf: 'stretch',
     marginBottom: 15
   },
@@ -153,3 +172,4 @@ const mapStateToProps = (state) => ({
 })
 
 export default connect(mapStateToProps, { isRegister })(RegisterScreen)
+

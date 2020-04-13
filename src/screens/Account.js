@@ -44,42 +44,33 @@ class Account extends Component {
             centerComponent={{ text: 'MY ACCOUNT', style: { color: '#fff' } }}
             rightComponent={{ icon: 'menu', color: '#fff' }}
           />
-          <View>
-            {/* {this.props.usersdetails && this.props.usersdetails.map((v, i) => {
+          {/* <View>
+            {this.props.usersdetails && this.props.usersdetails.map((v, i) => {
               return (
                 <> */}
-            <Card style={{ height: 80 }}
-            >
-              <Avatar
-                size='large'
-                rounded
-                source={{
-                  uri:
-                    'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-                }}
-                showEditButton
-              />
-              <Text style={{ position: 'absolute', marginTop: 15, paddingLeft: 100 }}>
-                Dinda Ayu
-                     </Text>
-              <Text style={{ position: 'absolute', marginTop: 35, paddingLeft: 100 }}> Balance</Text>
-              <Text style={{ position: 'absolute', marginTop: 55, paddingLeft: 100 }}> Balance</Text>
-              <TouchableOpacity style={styles.touchedit} onPress={this.changeScreenEditProfile} >
-                <Text style={styles.textEdit}>
-                  EDIT PROFILE
+          <Card style={{ height: 80 }}
+          >
+            <Avatar
+              size='large'
+              rounded
+              source={{
+                uri:
+                  'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
+              }}
+              showEditButton
+            />
+            <Text style={{ position: 'absolute', marginTop: 15, paddingLeft: 100 }}>Dinda</Text>
+            <Text style={{ position: 'absolute', marginTop: 35, paddingLeft: 100 }}>Balance : 350000</Text>
+            <TouchableOpacity style={styles.touchedit} onPress={this.changeScreenEditProfile} >
+              <Text style={styles.textEdit}>
+                EDIT PROFILE
                     </Text>
-              </TouchableOpacity>
-              {/* <Button
-              icon= <Icon name='code' color='#ffffff' />
-              buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, marginTop: 20 }}
-              title='Edit Profile' /> */}
-            </Card>
-            {/* </>
-
+            </TouchableOpacity>
+          </Card>
+          {/* </>
               )
-            })} */}
-
-          </View>
+            })}
+          </View> */}
           <View>
             <Card>
               <TouchableOpacity onPress={this.changeScreenTopUp}>
@@ -105,6 +96,7 @@ class Account extends Component {
           </View>
         </View>
       </View >
+
     )
   }
 }
