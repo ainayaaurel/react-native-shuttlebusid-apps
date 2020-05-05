@@ -1,19 +1,53 @@
-import React, { Component } from 'react'
-import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
-import { LocaleConfig } from 'react-native-calendars';
+import React, {Component} from 'react';
+import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
+import {LocaleConfig} from 'react-native-calendars';
 
-LocaleConfig.locales['fr'] = {
-  monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-  monthNamesShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'],
-  dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+LocaleConfig.locales.fr = {
+  monthNames: [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ],
+  monthNamesShort: [
+    'Janv.',
+    'Févr.',
+    'Mars',
+    'Avril',
+    'Mai',
+    'Juin',
+    'Juil.',
+    'Août',
+    'Sept.',
+    'Oct.',
+    'Nov.',
+    'Déc.',
+  ],
+  dayNames: [
+    'Dimanche',
+    'Lundi',
+    'Mardi',
+    'Mercredi',
+    'Jeudi',
+    'Vendredi',
+    'Samedi',
+  ],
   dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
-  today: 'Aujourd\'hui'
+  today: "Aujourd'hui",
 };
 LocaleConfig.defaultLocale = 'fr';
 
 export default class Calender extends Component {
   render() {
-    console.disableYellowBox = true
+    console.disableYellowBox = true;
     return (
       <Calendar
         // Initially visible month. Default = Date()
@@ -26,17 +60,20 @@ export default class Calender extends Component {
         onDayPress={(day) => {
           // console.log('selected day', day)
           // console.log(this.props.navigation.goBack())
-          this.props.route.params.selectdate(day)
-          this.props.navigation.goBack()
+          this.props.route.params.selectdate(day);
+          this.props.navigation.goBack();
           // this.props.navigation.navigate('Home', { dateSelected: day.dateString })
         }}
-
         // Handler which gets executed on day long press. Default = undefined
-        onDayLongPress={(day) => { console.log('selected day', day) }}
+        onDayLongPress={(day) => {
+          console.log('selected day', day);
+        }}
         // Month format in calendar title. Formatting values: http://arshaw.com/xdate/#Formatting
         monthFormat={'MMMM yyyy '}
         // Handler which gets executed when visible month changes in calendar. Default = undefined
-        onMonthChange={(month) => { console.log('month changed', month) }}
+        onMonthChange={(month) => {
+          console.log('month changed', month);
+        }}
         // Hide month navigation arrows. Default = false
 
         hideExtraDays={true}
@@ -50,11 +87,10 @@ export default class Calender extends Component {
         // Show week numbers to the left. Default = false
         // showWeekNumbers={true}
         // Handler which gets executed when press arrow icon left. It receive a callback can go back month
-        onPressArrowLeft={substractMonth => substractMonth()}
+        onPressArrowLeft={(substractMonth) => substractMonth()}
         // Handler which gets executed when press arrow icon left. It receive a callback can go next month
-        onPressArrowRight={addMonth => addMonth()}
+        onPressArrowRight={(addMonth) => addMonth()}
       />
-    )
+    );
   }
 }
-

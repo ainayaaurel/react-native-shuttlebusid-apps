@@ -1,37 +1,43 @@
-import React, { Component } from 'react'
-import { View, Text, StyleSheet, ScrollResponderMixin, Dimensions } from 'react-native'
-import { Card, PricingCard, CheckBox } from 'react-native-elements'
-import IconBus from 'react-native-vector-icons/MaterialCommunityIcons'
-import IconSort from 'react-native-vector-icons/FontAwesome5'
-import IconTime from 'react-native-vector-icons/MaterialCommunityIcons'
-import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler'
-import { Button, Header } from 'native-base'
-import { connect } from 'react-redux'
-import { getSchedules } from '../Redux/Actions/ActionsSchedules'
-import Icon from 'react-native-vector-icons/Ionicons'
+import React, {Component} from 'react';
+import {View, Text, StyleSheet, Dimensions} from 'react-native';
+import {Card, PricingCard, CheckBox} from 'react-native-elements';
+import IconBus from 'react-native-vector-icons/MaterialCommunityIcons';
+import IconSort from 'react-native-vector-icons/FontAwesome5';
+import IconTime from 'react-native-vector-icons/MaterialCommunityIcons';
+import {TouchableOpacity, ScrollView} from 'react-native-gesture-handler';
+import {connect} from 'react-redux';
+import {
+  getSchedules,
+  schedulesDetails,
+} from '../Redux/Actions/ActionsSchedules';
+import Icon from 'react-native-vector-icons/Ionicons';
 
-
-
-const { width: WIDTH } = Dimensions.get('window')
+const {width: WIDTH} = Dimensions.get('window');
 class SelectBus extends Component {
   constructor(props) {
-    super(props)
-    this.props.getSchedules(this.props.route.params.data)
+    super(props);
+    this.props.getSchedules(this.props.route.params.data);
     this.changeScreenToHome = () => {
-      this.props.navigation.navigate('Home')
-    }
+      this.props.navigation.navigate('Home');
+    };
     this.onChangeScreenChooseChair = () => {
-      this.props.navigation.navigate('Back')
-    }
-    this.changeScreenToPayment = () => {
-      this.props.navigation.navigate('Payment Confirmation')
-    }
+      this.props.navigation.navigate('Back');
+    };
+    this.changeScreenToPayment = async (data) => {
+      // console.log(this.state.id);
+      await this.props.schedulesDetails(data);
+      // await this.props.navigation.navigate('Payment Confirmation');
+    };
   }
-
+  state = {
+    id: 0,
+    schedules: null,
+  };
   componentDidMount() {
-    console.log('ini data sche', this.props.schedules)
+    console.log('ini data sche', this.props.schedules);
   }
   render() {
+    console.log(this.props.schedules);
     return (
       <ScrollView>
         <View>
@@ -44,61 +50,72 @@ class SelectBus extends Component {
               <Text style={styles.input} > 5 Busses Found </Text>
             </View>
           </View> */}
-
-          <View>
-            {this.props.schedules && this.props.schedules.map((v, i) => {
-              return (
-
-                <>
-                  <Card style={{ marginTop: 50 }} containerStyle={{ borderRadius: 4 }}>
-                    <Text style={styles.agentName}>{v.name_agents}</Text>
-                    <View style={styles.fixToText}>
-                      <View><Icon name='ios-bus' size={26} color={'#d9d9d9'} /></View>
-                      <Text style={styles.busName}>{v.name}</Text>
-
-                    </View>
-                    <View style={styles.fixToText}>
-                      {/* <View style={styles.start}><Icon name='ios-star' size={20} color={'#d9d9d9'} /></View> */}
-                      <Text style={styles.classBus}>{v.class}</Text>
-                    </View>
-                    <View style={styles.fixToTextSeat}>
-                      <View style={styles.seats}><Icon name='ios-person' size={23} color={'#d9d9d9'} /></View>
-                      <Text>{v.sheets} seats left</Text>
-                    </View>
-                    <View style={{ marginBottom: 20, marginTop: 20 }}>
+          <Text> aloohaaaaa</Text>
+          {/* <View>
+            {this.props.schedules &&
+              this.props.schedules.map((v, i) => {
+                return (
+                  <>
+                    <Card
+                      key={i}
+                      style={{marginTop: 50}}
+                      containerStyle={{borderRadius: 4}}>
+                      <Text style={styles.agentName}>{v.name_agents}</Text>
                       <View style={styles.fixToText}>
-                        <Text style={styles.route}>{v.departure_at} - {v.arrival_at}</Text>
+                        <View>
+                          <Icon name="ios-bus" size={26} color={'#d9d9d9'} />
+                        </View>
+                        <Text style={styles.busName}>{v.name}</Text>
+                      </View>
+                      <View style={styles.fixToText}>
+                        <Text style={styles.classBus}>{v.class}</Text>
                       </View>
                       <View style={styles.fixToTextSeat}>
                         <View style={styles.seats}>
-                          <IconTime name='clock-outline' size={23} color={'#d9d9d9'} />
+                          <Icon name="ios-person" size={23} color={'#d9d9d9'} />
                         </View>
-                        <Text>{v.time}</Text>
+                        <Text>{v.sheets} seats left</Text>
                       </View>
-                    </View>
-                    <View style={styles.fixToText}>
-                      <TouchableOpacity onPress={this.changeScreenToPayment} >
-                        <CheckBox
-                          containerStyle={{ backgroundColor: '#27ae60' }}
-                          iconType='material'
-                          checkedIcon='exit-to-app'
-                          textStyle={{ color: '#fff' }}
-                          checkedColor='#fff'
-                          title='Purchase'
-                          checked={this.changeScreenToPayment}
-                        />
-                      </TouchableOpacity>
-                      <Text style={styles.price}>Rp {v.price}</Text>
-                    </View>
-                  </Card>
-                </>
-              )
-            })}
-          </View>
+                      <View style={{marginBottom: 20, marginTop: 20}}>
+                        <View style={styles.fixToText}>
+                          <Text style={styles.route}>
+                            {v.departure_at} - {v.arrival_at}
+                          </Text>
+                        </View>
+                        <View style={styles.fixToTextSeat}>
+                          <View style={styles.seats}>
+                            <IconTime
+                              name="clock-outline"
+                              size={23}
+                              color={'#d9d9d9'}
+                            />
+                          </View>
+                          <Text>{v.time}</Text>
+                        </View>
+                      </View>
+                      <View style={styles.fixToText}>
+                        <TouchableOpacity
+                          onPress={() => this.changeScreenToPayment(v)}>
+                          <CheckBox
+                            containerStyle={{backgroundColor: '#27ae60'}}
+                            iconType="material"
+                            checkedIcon="exit-to-app"
+                            textStyle={{color: '#fff'}}
+                            checkedColor="#fff"
+                            title="Purchase"
+                            checked={this.changeScreenToPayment}
+                          />
+                        </TouchableOpacity>
+                        <Text style={styles.price}>Rp {v.price}</Text>
+                      </View>
+                    </Card>
+                  </>
+                );
+              })}
+          </View> */}
         </View>
       </ScrollView>
-
-    )
+    );
   }
 }
 
@@ -109,23 +126,23 @@ const styles = StyleSheet.create({
     backgroundColor: '#15B105',
     justifyContent: 'center',
     paddingLeft: 25,
-    height: 50
+    height: 50,
   },
   price: {
     marginTop: 10,
     marginLeft: 40,
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#27ae60'
+    color: '#27ae60',
   },
   route: {
-    fontSize: 14
+    fontSize: 14,
   },
   busName: {
     marginRight: 1,
     marginLeft: 10,
     paddingBottom: 10,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   seats: {
     marginLeft: 110,
@@ -138,14 +155,14 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     color: '#d9d9d9',
     borderTopWidth: 1,
-    borderTopColor: '#d9d9d9'
+    borderTopColor: '#d9d9d9',
   },
   agentName: {
     marginBottom: 5,
     fontWeight: 'bold',
     paddingBottom: 10,
     borderBottomColor: 'rgba(0,0,0,0.1)',
-    borderBottomWidth: 1
+    borderBottomWidth: 1,
   },
   fixToText: {
     flexDirection: 'row',
@@ -153,7 +170,7 @@ const styles = StyleSheet.create({
   fixToTextSeat: {
     flexDirection: 'row',
     marginTop: -35,
-    marginLeft: 90
+    marginLeft: 90,
   },
   headersecond: {
     backgroundColor: '#DCDCDC',
@@ -165,7 +182,7 @@ const styles = StyleSheet.create({
   card: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 40
+    marginTop: 40,
   },
   logoContainer: {
     alignItems: 'center',
@@ -177,12 +194,17 @@ const styles = StyleSheet.create({
     right: 30,
   },
   input: {
-    top: 8
+    top: 8,
   },
-})
+});
 
-const mapStateToProps = (state) => ({
-  schedules: state.schedules.schedules
-})
+const mapStateToProps = (state) => {
+  return {
+    schedules: state.schedules.schedules,
+    schedulesDetails: state.schedules.schedulesDetails,
+  };
+};
 
-export default connect(mapStateToProps, { getSchedules })(SelectBus)
+export default connect(mapStateToProps, {getSchedules, schedulesDetails})(
+  SelectBus,
+);

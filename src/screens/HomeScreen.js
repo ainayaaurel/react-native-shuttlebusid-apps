@@ -1,106 +1,118 @@
-import React, { Component } from 'react'
-import { View, Text, StyleSheet, Dimensions, TouchableOpacity } from 'react-native'
-import IconBus from 'react-native-vector-icons/FontAwesome5'
+import React, {Component} from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Dimensions,
+  TouchableOpacity,
+} from 'react-native';
+import IconBus from 'react-native-vector-icons/FontAwesome5';
 import PickerModal from 'react-native-picker-modal-view';
-import { Card, Header } from 'react-native-elements'
-import Icondots from 'react-native-vector-icons/MaterialCommunityIcons'
-import { getRoutes } from '../Redux/Actions/ActionsRoutes'
+import {Card, Header} from 'react-native-elements';
+import Icondots from 'react-native-vector-icons/MaterialCommunityIcons';
+import {getRoutes} from '../Redux/Actions/ActionsRoutes';
 
-import { connect } from 'react-redux'
+import {connect} from 'react-redux';
 
-const { width: WIDTH } = Dimensions.get('window')
+const {width: WIDTH} = Dimensions.get('window');
 
 class HomeScreen extends Component {
   constructor(props) {
-    super(props)
-    this.props.getRoutes()
-    this.changeScreenToBus = () => {
-      this.props.navigation.navigate('Select Bus', { data: this.state.selectedItems.Value })
-    }
+    super(props);
+    this.props.getRoutes();
+    this.changeScreenToBus = async () => {
+      await this.props.navigation.navigate('Select Bus', {
+        data: this.state.selectedItems.Value,
+      });
+    };
 
     this.changeScreenToCalendar = () => {
-      this.props.navigation.navigate('Calendar', { selectdate: (date) => this.updateDate(date) })
-    }
-
+      this.props.navigation.navigate('Calendar', {
+        selectdate: (date) => this.updateDate(date),
+      });
+    };
   }
   state = {
     search: '',
     selectedItems: {},
-    date: {}
-
+    date: {},
   };
-  updateSearch = search => {
-    this.setState({ search });
+  updateSearch = (search) => {
+    this.setState({search});
   };
-  selected = selectedItems => {
-    this.setState({ selectedItems })
+  selected = (selectedItems) => {
+    this.setState({selectedItems});
 
-    console.log('selected', selectedItems)
+    console.log('selected', selectedItems);
   };
 
-  updateDate = date => {
-    this.setState({ date });
+  updateDate = (date) => {
+    this.setState({date});
     // console.log(date)
-  }
+  };
   componentDidMount() {
-
     // console.log('ini data cuy', this.props.routes)
     // console.log('ini login', this.props.login)
   }
   render() {
-    console.disableYellowBox = true
+    console.disableYellowBox = true;
     return (
       <View>
         <Header
-          containerStyle={{ backgroundColor: '#15B105', marginTop: -30 }}
-          centerComponent={{ text: 'SHUTTLEBUS-ID', fontWeight: 'bold', style: { color: '#fff' } }}
-          leftComponent={<IconBus name='bus' color='#fff' size={30} />}
-          rightComponent={<Icondots name='dots-vertical' color='#fff' size={30} />}
+          containerStyle={{backgroundColor: '#15B105', marginTop: -30}}
+          centerComponent={{
+            text: 'SHUTTLEBUS-ID',
+            fontWeight: 'bold',
+            style: {color: '#fff'},
+          }}
+          leftComponent={<IconBus name="bus" color="#fff" size={30} />}
+          rightComponent={
+            <Icondots name="dots-vertical" color="#fff" size={30} />
+          }
         />
         <Card>
-          <Text style={{ marginBottom: 10 }}>
-            Departure - Arrival
-          </Text>
-          {this.props.routes && <PickerModal
-
-            value={this.state.selectedItems}
-
-            onSelected={(selected) => this.selected(selected)}
-            onRequestClosed={() => console.warn('closed...')}
-            onBackRequest={() => console.warn('back key pressed')}
-            items={this.props.routes}
-            sortingLanguage={'tr'}
-            showToTopButton={true}
-            defaultSelected={this.state.selectedItem}
-            autoCorrect={false}
-            autoGenerateAlphabet={true}
-            chooseText={'Select departure - arrival'}
-            searchText={'Search...'}
-            forceSelect={false}
-            autoSort={true}
-          />}
-          <Text style={{ marginBottom: 10, fontSize: 18 }}>
-            Date
-          </Text>
+          <Text style={{marginBottom: 10}}>Departure - Arrival</Text>
+          {this.props.routes && (
+            <PickerModal
+              value={this.state.selectedItems}
+              onSelected={(selected) => this.selected(selected)}
+              onRequestClosed={() => console.warn('closed...')}
+              onBackRequest={() => console.warn('back key pressed')}
+              items={this.props.routes}
+              sortingLanguage={'tr'}
+              showToTopButton={true}
+              defaultSelected={this.state.selectedItem}
+              autoCorrect={false}
+              autoGenerateAlphabet={true}
+              chooseText={'Select departure - arrival'}
+              searchText={'Search...'}
+              forceSelect={false}
+              autoSort={true}
+            />
+          )}
+          <Text style={{marginBottom: 10, fontSize: 18}}>Date</Text>
           <TouchableOpacity onPress={this.changeScreenToCalendar}>
-            <Text>
-              Date Pick
-            </Text>
+            <Text>Date Pick</Text>
             <Text>
               {this.state.date.dateString && this.state.date.dateString}
             </Text>
-
           </TouchableOpacity>
           <TouchableOpacity style={styles.btnSearch}>
-            <Text style={styles.textSearch} onPress={this.changeScreenToBus}>SEARCH</Text>
+            <Text
+              style={styles.textSearch}
+              onPress={() =>
+                this.props.navigation.navigate('Select Bus', {
+                  data: this.state.selectedItems.Value,
+                })
+              }>
+              SEARCH
+            </Text>
           </TouchableOpacity>
         </Card>
       </View>
-    )
+    );
   }
 }
-
-
 
 const styles = StyleSheet.create({
   header: {
@@ -114,13 +126,13 @@ const styles = StyleSheet.create({
     height: 45,
     backgroundColor: '#42A845',
     justifyContent: 'center',
-    marginTop: 20
+    marginTop: 20,
   },
   textSearch: {
     fontSize: 16,
     textAlign: 'center',
     fontWeight: 'bold',
-    color: '#fff'
+    color: '#fff',
   },
   input: {
     width: WIDTH - 50,
@@ -135,31 +147,30 @@ const styles = StyleSheet.create({
     borderLeftWidth: 1,
     shadowOpacity: 0.7,
     borderColor: '#fff',
-    color: '#000'
+    color: '#000',
   },
   inputContainer: {
     position: 'relative',
     marginTop: 10,
-    alignItems: 'center'
+    alignItems: 'center',
   },
   search: {
-    backgroundColor: '#fff'
-  }
-})
+    backgroundColor: '#fff',
+  },
+});
 
 const mapStateToProps = (state) => ({
   routes: state.routes.routes,
   login: state.login.sudahlogin,
+});
 
-})
+export default connect(mapStateToProps, {getRoutes})(HomeScreen);
 
-export default connect(mapStateToProps, { getRoutes })(HomeScreen)
-
-
-
-{/* <View style={styles.header}>
+{
+  /* <View style={styles.header}>
           <IconBus name='bus-side' size={50} color='#fff' />
-        </View> */}
+        </View> */
+}
 // {/* <View style={styles.inputContainer}>
 //           <TextInput
 //             style={styles.input} placeholder='Your name'
@@ -201,7 +212,6 @@ export default connect(mapStateToProps, { getRoutes })(HomeScreen)
 //         //   onChangeText={this.updateSearch}
 //         //   value={this.state.search}
 //         // />
-
 
 // import React, { Component } from 'react'
 // import { Text } from 'react-native'

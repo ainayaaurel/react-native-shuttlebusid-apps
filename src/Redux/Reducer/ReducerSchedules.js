@@ -1,17 +1,26 @@
 const initialState = {
-  schedules: []
-}
+  schedules: [],
+  schedulesDetails: [],
+};
 
-const schedulesReducer = (state = initialState, action) => {
+const ReducersSchedules = (state = initialState, action) => {
   switch (action.type) {
     case 'GET_SCHEDULES': {
+      const newSchedules = [...state.schedules, action.payload];
       return {
         ...state,
-        schedules: action.payload
-      }
+        schedules: action.payload,
+      };
+    }
+    case 'GET_SCHEDULES_DETAILS': {
+      const newDetailsSchedules = [...state.schedulesDetails, action.payload];
+      return {
+        ...state,
+        schedulesDetails: action.payload,
+      };
     }
     default:
-      return state
+      return state;
   }
-}
-export default schedulesReducer
+};
+export default ReducersSchedules;

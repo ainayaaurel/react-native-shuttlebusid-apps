@@ -1,36 +1,27 @@
-import React, { Component } from 'react'
-import { Header } from 'react-native-elements'
-import { View, Text, StyleSheet, Dimensions, TouchableOpacity } from 'react-native'
-import IconBarcode from 'react-native-vector-icons/FontAwesome'
+import React, {Component} from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Dimensions,
+  TouchableOpacity,
+} from 'react-native';
+import {schedulesDetails} from '../Redux/Actions/ActionsSchedules';
+import {connect} from 'react-redux';
 
-
-const { width: WIDTH } = Dimensions.get('window')
-export default class Payment extends Component {
+const {width: WIDTH} = Dimensions.get('window');
+class Payment extends Component {
   constructor(props) {
-    super(props),
-      this.changeScreenToMyOrder = () => {
-        this.props.navigation.navigate('My Order')
-      }
+    super(props);
+  }
+
+  componentDidMount() {
+    console.log('ini sche details', this.props.details);
   }
   render() {
-    return (
-      <View>
-        <View style={localStyle.headersecond}>
-          <View style={localStyle.box1}>
-            <Text style={localStyle.inputDeparture}> Departure Date</Text>
-            <Text style={localStyle.input}> Route : Bandung - Jakarta</Text>
-            <Text style={localStyle.input}> Date : 18-04-2020</Text>
-            <Text style={localStyle.input}> Time : 09:00:00</Text>
-            <Text style={localStyle.inputTicket}> Ticket Price</Text>
-            <Text style={localStyle.input}> Price : Rp 120.000</Text>
-            <Text style={localStyle.input}> Total :  Rp 120.000</Text>
-          </View>
-          <TouchableOpacity style={localStyle.btnSearch}>
-            <Text style={localStyle.textSearch} onPress={this.changeScreenToMyOrder}>ORDER</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    )
+    console.log('HAHA', this.state.data);
+
+    return <></>;
   }
 }
 
@@ -54,7 +45,7 @@ const localStyle = StyleSheet.create({
     fontWeight: 'bold',
     color: 'grey',
     marginBottom: 5,
-    paddingLeft: 10
+    paddingLeft: 10,
   },
   inputDeparture: {
     top: 8,
@@ -75,13 +66,13 @@ const localStyle = StyleSheet.create({
     height: 45,
     backgroundColor: '#42A845',
     justifyContent: 'center',
-    marginTop: 20
+    marginTop: 20,
   },
   textSearch: {
     fontSize: 16,
     textAlign: 'center',
     fontWeight: 'bold',
-    color: '#fff'
+    color: '#fff',
   },
   box1: {
     // justifyContent: 'center',
@@ -89,8 +80,16 @@ const localStyle = StyleSheet.create({
     // marginBottom: 90,
   },
 });
+const mapStateToProps = (state) => {
+  return {
+    details: state.schedules.schedulesDetails,
+  };
+};
 
-{/* export default class History extends Component {
+export default connect(mapStateToProps)(Payment);
+
+{
+  /* export default class History extends Component {
   render() {
     return (
       <View>
@@ -99,8 +98,8 @@ const localStyle = StyleSheet.create({
           centerComponent={{ text: 'MY ORDER', fontWeight: 'bold', style: { color: '#fff' } }}
           leftComponent={<IconBus name='bus' color='#fff' size={30} />}
           rightComponent={<Icondots name='dots-vertical' color='#fff' size={30} />}
-        /> */}
-
+        /> */
+}
 
 //       </View >
 //     )
@@ -116,7 +115,8 @@ const localStyle = StyleSheet.create({
 //   }
 // }) * /}
 
-{/* <View style={{ flex: 1 }}>
+{
+  /* <View style={{ flex: 1 }}>
           <Text>Departure data</Text>
           <Text>Departure : </Text>
           <Text>Arrival : </Text>
@@ -128,4 +128,5 @@ const localStyle = StyleSheet.create({
 
         <View style={{ flex: 1, backgroundColor: 'green' }}>
           <Text>Test</Text>
-        </View> */}
+        </View> */
+}

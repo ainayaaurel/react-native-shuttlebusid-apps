@@ -1,18 +1,18 @@
 const initState = {
-  routes: []
-}
+  routes: [],
+};
 
-const routesReducer = (state = initState, action) => {
+const ReducerRoutes = (state = initState, action) => {
   switch (action.type) {
     case 'GET_ROUTES': {
       return {
         ...state,
-        routes: action.payload
-      }
+        routes: action.payload,
+      };
     }
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default routesReducer
+export default ReducerRoutes;

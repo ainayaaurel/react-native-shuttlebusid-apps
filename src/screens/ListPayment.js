@@ -1,14 +1,12 @@
-import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import React, {Component} from 'react';
+import {View, Text} from 'react-native';
 
 export default class ListPayment extends Component {
   render() {
     return (
       <View>
-        <Text>
-          liss alfamart
-        </Text>
+        <Text>liss alfamart</Text>
       </View>
-    )
+    );
   }
 }

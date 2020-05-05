@@ -1,17 +1,17 @@
-import config from '../../utils/config'
-import axios from 'axios'
+import config from '../../utils/config';
+import axios from 'axios';
 
 export const getMyAccount = () => async dispatch => {
   try {
     const res = await axios.get(config.APP_BACKEND.concat(`userdetails/myprofile`));
     dispatch({
       type: 'GET_MY_ACCOUNT',
-      payload: res.data.data
-    })
+      payload: res.data.data,
+    });
   } catch (error) {
-    console.log(error)
+    console.log(error),
   }
-}
+};
 
 
 // export const updateMyProfile = (picture) => async dispatch => {

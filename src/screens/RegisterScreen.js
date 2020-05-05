@@ -1,19 +1,21 @@
-import React, { Component } from 'react'
-import { View, Text, StyleSheet, Dimensions } from 'react-native'
-import { TextInput, TouchableOpacity, ScrollView } from 'react-native-gesture-handler'
-import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
-import { connect } from 'react-redux'
-import { isRegister } from '../Redux/Actions/Auth/AuthLogin'
-
+import React, {Component} from 'react';
+import {View, Text, StyleSheet, Dimensions} from 'react-native';
+import {
+  TextInput,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native-gesture-handler';
+import {connect} from 'react-redux';
+import {isRegister} from '../Redux/Actions/Auth/AuthLogin';
 
 // var radio_props = [
 //   { label: 'Male', value: 0 },
 //   { label: 'Female', value: 1 }
 // ];
-const { width: WIDTH } = Dimensions.get('window')
+const {width: WIDTH} = Dimensions.get('window');
 class RegisterScreen extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       username: '',
       password: '',
@@ -22,9 +24,9 @@ class RegisterScreen extends Component {
       address: '',
       phone: '',
       email: '',
-    }
+    };
     this.submitData = async () => {
-      this.setState({ isLoading: true })
+      this.setState({isLoading: true});
       const data = {
         username: this.state.username,
         password: this.state.password,
@@ -33,21 +35,21 @@ class RegisterScreen extends Component {
         address: this.state.address,
         phone: this.state.phone,
         email: this.state.email,
-      }
-      console.log(data, 'ini daata register')
-      await this.props.isRegister(data)
-      this.props.navigation.navigate('Verification')
+      };
+      console.log(data, 'ini daata register');
+      await this.props.isRegister(data);
+      this.props.navigation.navigate('Verification');
       // this.changeScreenToVerify = () => {
       //   this.props.navigation.navigate('Verification')
       // }
-    }
+    };
     this.changeScreenLogin = () => {
-      this.props.navigation.navigate('Login')
-    }
-
+      this.props.navigation.navigate('Login');
+    };
   }
   render() {
     // console.log('hai', this.props.isRegister)
+    console.disableYellowBox = true;
     return (
       <ScrollView>
         <View style={styles.parent}>
@@ -56,26 +58,30 @@ class RegisterScreen extends Component {
           </View>
           <View>
             <TextInput
-              style={styles.input} placeholder='Your username'
-              onChangeText={(username) => this.setState({ username: username })}
+              style={styles.input}
+              placeholder="Your username"
+              onChangeText={(username) => this.setState({username: username})}
             />
           </View>
           <View>
             <TextInput
-              style={styles.input} placeholder='Your password'
-              onChangeText={(password) => this.setState({ password: password })}
+              style={styles.input}
+              placeholder="Your password"
+              onChangeText={(password) => this.setState({password: password})}
             />
           </View>
           <View>
             <TextInput
-              style={styles.input} placeholder='Your name'
-              onChangeText={(name) => this.setState({ name: name })}
+              style={styles.input}
+              placeholder="Your name"
+              onChangeText={(name) => this.setState({name: name})}
             />
           </View>
           <View>
             <TextInput
-              style={styles.input} placeholder='Your gender (Male/Female)'
-              onChangeText={(gender) => this.setState({ gender: gender })}
+              style={styles.input}
+              placeholder="Your gender (Male/Female)"
+              onChangeText={(gender) => this.setState({gender: gender})}
             />
             {/* <RadioForm
               radio_props={radio_props}
@@ -85,20 +91,23 @@ class RegisterScreen extends Component {
           </View>
           <View>
             <TextInput
-              style={styles.input} placeholder='Your address'
-              onChangeText={(address) => this.setState({ address: address })}
+              style={styles.input}
+              placeholder="Your address"
+              onChangeText={(address) => this.setState({address: address})}
             />
           </View>
           <View>
             <TextInput
-              style={styles.input} placeholder='Your phone'
-              onChangeText={(phone) => this.setState({ phone: phone })}
+              style={styles.input}
+              placeholder="Your phone"
+              onChangeText={(phone) => this.setState({phone: phone})}
             />
           </View>
           <View>
             <TextInput
-              style={styles.input} placeholder='Your email'
-              onChangeText={(email) => this.setState({ email: email })}
+              style={styles.input}
+              placeholder="Your email"
+              onChangeText={(email) => this.setState({email: email})}
             />
           </View>
           <TouchableOpacity style={styles.btnSignUp} onPress={this.submitData}>
@@ -106,12 +115,14 @@ class RegisterScreen extends Component {
           </TouchableOpacity>
           <View>
             <TouchableOpacity style={styles.login}>
-              <Text style={styles.textLogIn} onPress={this.changeScreenLogin}>Already have an account yet? Log In</Text>
+              <Text style={styles.textLogIn} onPress={this.changeScreenLogin}>
+                Already have an account yet? Log In
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
       </ScrollView>
-    )
+    );
   }
 }
 
@@ -120,12 +131,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    color: '#fff'
+    color: '#fff',
   },
   title: {
     fontSize: 20,
     color: 'black',
-    marginBottom: 20
+    marginBottom: 20,
   },
   input: {
     width: WIDTH - 65,
@@ -134,7 +145,7 @@ const styles = StyleSheet.create({
     color: 'black',
     borderBottomWidth: 1,
     alignSelf: 'stretch',
-    marginBottom: 15
+    marginBottom: 15,
   },
   inputgender: {
     width: WIDTH - 65,
@@ -143,7 +154,7 @@ const styles = StyleSheet.create({
     color: 'black',
     // borderBottomWidth: 1,
     alignSelf: 'stretch',
-    marginBottom: 15
+    marginBottom: 15,
   },
   btnSignUp: {
     width: WIDTH - 200,
@@ -151,7 +162,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     backgroundColor: '#15B105',
     justifyContent: 'center',
-    paddingBottom: 5
+    paddingBottom: 5,
   },
   textSignUp: {
     fontSize: 18,
@@ -160,16 +171,15 @@ const styles = StyleSheet.create({
   },
   textLogIn: {
     fontSize: 12,
-    textDecorationLine: 'underline'
+    textDecorationLine: 'underline',
   },
   login: {
-    marginTop: 20
-  }
-})
+    marginTop: 20,
+  },
+});
 
 const mapStateToProps = (state) => ({
-  register: state.login.isRegister
-})
+  register: state.login.isRegister,
+});
 
-export default connect(mapStateToProps, { isRegister })(RegisterScreen)
-
+export default connect(mapStateToProps, {isRegister})(RegisterScreen);
